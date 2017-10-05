@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">QueueCoorv</string>
+    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- Accessibility description for navigation mDrawerLayout -->
+    <string name="navdrawer_description_a11y">Navigation Drawer used to switch between major features of the application</string>
+    <string name="title_activity_member_">Member</string>
+    <string name="title_activity_coor_">Coordinator</string>
+    <string name="note_member">Select your health card</string>
+    <string name="note_member_fillup">Please fill up the fields</string>
+    <string name="note_member_info">Member Information</string>
+    <string name="card_1_string">MEDICARD</string>
+    <string name="card_2_string">MAXICARE</string>
+    <string name="card_3_string">PHILCARE</string>
+    <string name="card_4_string">SUNLIFE</string>
+    <string name="card_5_string">INTELLICARE</string>
+    <string name="card_6_string">OTHERS</string>
+</resources>

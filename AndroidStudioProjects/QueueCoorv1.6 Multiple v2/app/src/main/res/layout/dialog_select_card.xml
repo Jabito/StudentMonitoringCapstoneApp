@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/note_member_fillup"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_13sdp"
+        android:textAllCaps="true"
+        />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInputEditTextfsa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Health Care">
+
+        <EditText
+            android:id="@+id/ed_selectedCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/_10sdp"
+            android:enabled="false"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Name">
+
+        <EditText
+            android:id="@+id/ed_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/_10sdp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInputEditText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Mobile Number">
+
+        <EditText
+            android:id="@+id/ed_mobNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="11"
+            android:textSize="@dimen/_10sdp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInput_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Membership Code">
+
+        <EditText
+            android:id="@+id/ed_memCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:textSize="@dimen/_10sdp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/colorPrimaryLight"
+        android:text="Register"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/bt_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/colorPrimaryLight"
+        android:text="cancel"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
