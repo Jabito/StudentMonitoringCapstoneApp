@@ -1,11 +1,13 @@
 package com.jambi.macbookpro.smsapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.jambi.macbookpro.smsapp.LoginActivity;
 import com.jambi.macbookpro.smsapp.R;
@@ -22,105 +28,152 @@ import com.jambi.macbookpro.smsapp.fragments.AttendanceFragment;
 import com.jambi.macbookpro.smsapp.fragments.HomeFragment;
 import com.jambi.macbookpro.smsapp.fragments.MessagesFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer_layout;
+    @BindView(R.id.btn_nav)
+    ImageButton btn_nav;
+
+
+    @BindView(R.id.nav_home)
+    TextView nav_home;
+    @BindView(R.id.nav_attendance_logs)
+    TextView nav_attendance_logs;
+    @BindView(R.id.nav_messages)
+    TextView nav_messages;
+    @BindView(R.id.nav_settings)
+    TextView nav_settings;
+    @BindView(R.id.nav_logout)
+    TextView nav_logout;
+
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+    @BindView(R.id.tv_desc)
+    TextView tv_desc;
+
+    @BindView(R.id.tv_header)
+    TextView tv_header;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.container_body)
+    FrameLayout container_body;
+
+    Fragment fragment;
+    FragmentTransaction fragmentTransaction;
+
+
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        context = this;
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        toolbar.setVisibility(View.VISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        tv_name.setText("MAGCULANG, JOHN JOSEPH P.");
+        tv_desc.setText("BSIT(2012) 4th Year");
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment fragment = null;
+        btn_nav.setOnClickListener(this);
+        nav_home.setOnClickListener(this);
+        nav_attendance_logs.setOnClickListener(this);
+        nav_messages.setOnClickListener(this);
+        nav_settings.setOnClickListener(this);
+        nav_logout.setOnClickListener(this);
+
+
+        tv_header.setText("Home");
+        fragment = null;
         fragment = new HomeFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment);
         fragmentTransaction.commit();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        tv_header.setText("My Account");
+        if (fragment.equals(HomeFragment.class)) {
+            if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+                drawer_layout.closeDrawer(Gravity.LEFT);
+            }
         } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-            Fragment fragment = null;
+            if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+                drawer_layout.closeDrawer(Gravity.LEFT);
+            }
+            fragment = null;
             fragment = new HomeFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
 
-
-        } else if (id == R.id.nav_attendance_logs) {
-            //Handle Attendance Logs action
-            Fragment fragment = null;
-            fragment = new AttendanceFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_messages) {
-
-            //Handle Messages Action
-            Fragment fragment = null;
-            fragment = new MessagesFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_logout) {
-
-            Intent goToLogin = new Intent(this,LoginActivity.class);
-            startActivity(goToLogin);
         }
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.nav_home:
+                tv_header.setText(context.getString(R.string.home));
+                fragment = null;
+                fragment = new HomeFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+                closeDrawer();
+                break;
+            case R.id.nav_attendance_logs:
+                tv_header.setText(context.getString(R.string.attendanceLog));
+                fragment = null;
+                fragment = new AttendanceFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+                closeDrawer();
+                break;
+            case R.id.nav_messages:
+                tv_header.setText(context.getString(R.string.message_));
+                fragment = null;
+                fragment = new MessagesFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+                closeDrawer();
+                break;
+            case R.id.nav_settings:
+                tv_header.setText(context.getString(R.string.action_settings));
+                closeDrawer();
+                break;
+            case R.id.nav_logout:
+                Intent goToLogin = new Intent(this, LoginActivity.class);
+                startActivity(goToLogin);
+                closeDrawer();
+                break;
+            case R.id.btn_nav:
+                closeDrawer();
+                break;
+        }
+    }
+
+    private void closeDrawer() {
+
+        if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+            drawer_layout.closeDrawer(Gravity.LEFT);
+        } else {
+            drawer_layout.openDrawer(Gravity.LEFT);
+        }
     }
 }

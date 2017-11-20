@@ -6,4 +6,12 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="textMedium">24sp</dimen>
+    <dimen name="drawerWidth">280dp</dimen>
+    <dimen name="margin">20dp</dimen>
+    <dimen name="sub_margin">10dp</dimen>
+    <dimen name="text_main">15sp</dimen>
+    <dimen name="nav_text_size">15sp</dimen>
+    <dimen name="nav_padding">10dp</dimen>
+    <dimen name="imageCircle_height">120dp</dimen>
+    <dimen name="imageCircle_width">120dp</dimen>
 </resources>
