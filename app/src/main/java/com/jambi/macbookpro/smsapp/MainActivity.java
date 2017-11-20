@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.jambi.macbookpro.smsapp.LoginActivity;
+import com.jambi.macbookpro.smsapp.R;
 import com.jambi.macbookpro.smsapp.fragments.AttendanceFragment;
 import com.jambi.macbookpro.smsapp.fragments.HomeFragment;
 import com.jambi.macbookpro.smsapp.fragments.MessagesFragment;
@@ -30,8 +32,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setVisibility(View.VISIBLE);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
