@@ -49,20 +49,8 @@
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_close_black_24dp"
-                android:scaleType="fitEnd"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_close_black_24dp"
-                android:scaleType="fitEnd"/>
+                android:scaleType="fitEnd"
+                android:src="@mipmap/ic_close_black_24dp" />
 
         </LinearLayout>
 
@@ -74,8 +62,8 @@
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_close_black_24dp"
-                android:scaleType="fitEnd"/>
+                android:scaleType="fitEnd"
+                android:src="@mipmap/ic_close_black_24dp" />
 
         </LinearLayout>
 
@@ -87,12 +75,23 @@
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_close_black_24dp"
-                android:scaleType="fitEnd"/>
+                android:scaleType="fitEnd"
+                android:src="@mipmap/ic_close_black_24dp" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
 
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitEnd"
+                android:src="@mipmap/ic_close_black_24dp" />
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -100,15 +99,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
         <TextView
-            android:textAlignment="center"
-            android:text="@string/message_announcement"
-            android:textColor="@color/midnightBlue"
-            android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/message_announcement"
+            android:textAlignment="center"
+            android:textColor="@color/midnightBlue"
+            android:textSize="20sp" />
 
 
     </LinearLayout>
