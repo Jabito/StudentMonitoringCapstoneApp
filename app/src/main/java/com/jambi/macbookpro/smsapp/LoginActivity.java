@@ -1,18 +1,17 @@
 package com.jambi.macbookpro.smsapp;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Network;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 import com.jambi.macbookpro.smsapp.callback.LoginCallback;
+import com.jambi.macbookpro.smsapp.implement.LoginImplement;
 import com.jambi.macbookpro.smsapp.model.LogInDetails;
+import com.jambi.macbookpro.smsapp.utilities.Constant;
 import com.jambi.macbookpro.smsapp.utilities.CustomDialog;
 import com.jambi.macbookpro.smsapp.utilities.ErrorMessage;
 import com.jambi.macbookpro.smsapp.utilities.Loader;
@@ -83,9 +82,14 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     @Override
     public void onSuccessSignIn(LogInDetails body) {
+        if(body.getUser().getUserTypeId().equalsIgnoreCase(Constant.ADMIN)){
+
+        }else if (body.getUser().getUserTypeId().equalsIgnoreCase(Constant.GUIDANCE)){
+
+        }else if (body.getUser().getUserTypeId().equalsIgnoreCase(Constant.PARENT)){
+//            callback.getParent();
+        }
         loader.stopLoad();
-
-
     }
 
     @Override
