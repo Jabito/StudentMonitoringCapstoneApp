@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setVisibility(View.VISIBLE);
 
+<<<<<<< Updated upstream
+=======
+        tv_name.setText("DELACRUZ, JUAN P.");
+        tv_desc.setText("BSIT(2012) 4th Year");
+>>>>>>> Stashed changes
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
