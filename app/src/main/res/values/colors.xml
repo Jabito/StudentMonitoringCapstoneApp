@@ -11,5 +11,7 @@
 
     <color name="colorPrimary_selec">#503F51B5</color>
     <color name="_grey">#37474f</color>
+    <color name="BLACK">#000000</color>
+    <color name="WHITE">#FFFFFF</color>
 
 </resources>

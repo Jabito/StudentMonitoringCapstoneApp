@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        tv_name.setText("MAGCULANG, JOHN JOSEPH P.");
+        tv_name.setText("DELACRUZ, JUAN P.");
         tv_desc.setText("BSIT(2012) 4th Year");
 
 
