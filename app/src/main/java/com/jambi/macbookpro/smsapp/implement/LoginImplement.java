@@ -2,9 +2,8 @@ package com.jambi.macbookpro.smsapp.implement;
 
 import android.content.Context;
 
-import com.jambi.macbookpro.smsapp.apiCalls.LogInAPiCall;
+import com.jambi.macbookpro.smsapp.apiCalls.APICall;
 import com.jambi.macbookpro.smsapp.callback.LoginCallback;
-import com.jambi.macbookpro.smsapp.model.LogIn;
 
 /**
  * Created by IPC on 11/22/2017.
@@ -19,6 +18,18 @@ public class LoginImplement {
     }
 
     public void getSignInData(String username, String password, LoginCallback callback) {
-        LogInAPiCall.logIn(username,password, callback);
+        APICall.getLogIn(username,password, callback);
+    }
+
+    public void getGuidance(String id, LoginCallback callback) {
+        APICall.getGuidance(id, callback);
+    }
+
+    public void getParent(String id, LoginCallback callback) {
+        APICall.getParent(id, callback);
+    }
+
+    public void getStudent(String parentOf, LoginCallback callback) {
+        APICall.getStudent(parentOf, callback);
     }
 }

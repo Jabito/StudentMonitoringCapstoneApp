@@ -3,6 +3,11 @@ package com.jambi.macbookpro.smsapp.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.jambi.macbookpro.smsapp.model.LogInDetails;
+import com.jambi.macbookpro.smsapp.model.Parent;
+import com.jambi.macbookpro.smsapp.model.Student;
+import com.jambi.macbookpro.smsapp.model.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,10 +16,20 @@ import java.util.HashMap;
  */
 
 public class SharedPref {
-
+    //MASTER KEY
     public static String USER = "USER";
+    public static User userData;
+    public static Parent parentData;
+    public static Student studentData;
 
-    //CREDENTIALS
+    //USED UPON RETRIEVAL OF PARENT`S INFORMATION
+    public static String PARENT_ID = "PARENT_ID";
+    public static String PARENT_PARENT_OF = "PARENT_PARENT_OF";
+    public static String PARENT_RELATIONSHIP = "PARENT_RELATIONSHIP";
+    public static String PARENT_LNAME = "PARENT_LNAME";
+    public static String PARENT_FNAME = "PARENT_FNAME";
+    public static String PARENT_CONTACT = "PARENT_CONTACT";
+    public static String PARENT_OCUPATION = "PARENT_OCUPATION";
 
 
     public void setBoolValue(String Key, boolean value, Context context) {

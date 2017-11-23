@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:paddingBottom="80dp">
 
             <LinearLayout
+                android:id="@+id/tv_parent_info"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,6 +100,36 @@
                         android:textSize="@dimen/nav_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/sub_margin"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/sub_margin">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_school_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/nav_student"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/sub_margin"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/nav_padding"
+                        android:text="@string/student"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/nav_text_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"

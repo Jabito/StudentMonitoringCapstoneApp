@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.jambi.macbookpro.smsapp.MainActivity">
+    tools:context="com.jambi.macbookpro.smsapp.NavigationActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -42,7 +42,6 @@
                     android:id="@+id/tv_header"
                     android:textSize="@dimen/text_main"
                     android:textColor="@android:color/white"/>
-
 
 
             </LinearLayout>

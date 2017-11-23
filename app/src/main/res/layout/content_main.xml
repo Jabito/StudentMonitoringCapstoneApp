@@ -4,7 +4,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/content_navigation"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="com.jambi.macbookpro.smsapp.MainActivity"
+tools:context="com.jambi.macbookpro.smsapp.NavigationActivity"
 tools:showIn="@layout/app_bar_main">
 
 <FrameLayout

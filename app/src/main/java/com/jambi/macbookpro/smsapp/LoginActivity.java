@@ -1,8 +1,10 @@
 package com.jambi.macbookpro.smsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,12 +12,15 @@ import android.widget.EditText;
 
 import com.jambi.macbookpro.smsapp.callback.LoginCallback;
 import com.jambi.macbookpro.smsapp.implement.LoginImplement;
+import com.jambi.macbookpro.smsapp.model.EmergencyContactDetails;
+import com.jambi.macbookpro.smsapp.model.GuidanceDetails;
 import com.jambi.macbookpro.smsapp.model.LogInDetails;
-import com.jambi.macbookpro.smsapp.utilities.Constant;
+import com.jambi.macbookpro.smsapp.model.ParentDetails;
+import com.jambi.macbookpro.smsapp.model.StudentDetails;
 import com.jambi.macbookpro.smsapp.utilities.CustomDialog;
-import com.jambi.macbookpro.smsapp.utilities.ErrorMessage;
 import com.jambi.macbookpro.smsapp.utilities.Loader;
 import com.jambi.macbookpro.smsapp.utilities.NetworkTest;
+import com.jambi.macbookpro.smsapp.utilities.SharedPref;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,19 +87,75 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     @Override
     public void onSuccessSignIn(LogInDetails body) {
-        if(body.getUser().getUserTypeId().equalsIgnoreCase(Constant.ADMIN)){
+        SharedPref.userData = body.getUser();
+//        implement.getParent(body.getUser().getId(),callback);
+        implement.getParent("parent1230",callback);
 
-        }else if (body.getUser().getUserTypeId().equalsIgnoreCase(Constant.GUIDANCE)){
 
-        }else if (body.getUser().getUserTypeId().equalsIgnoreCase(Constant.PARENT)){
-//            callback.getParent();
-        }
-        loader.stopLoad();
     }
 
     @Override
-    public void onErrorSignIn(String s) {
-        dialog.showMessage(context,dialog.NO_Internet_title, ErrorMessage.setErrorMessage(s),1);
+    public void onErrorSignIn(String message) {
+        loader.stopLoad();
+        dialog.showMessage(context,dialog.NO_Internet_title, message,1);
+    }
+
+    @Override
+    public void onSuccessGetParentDetails(ParentDetails body) {
+        loader.stopLoad();
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_PARENT_OF,body.getParent().getParentOf(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_LNAME,body.getParent().getParentLName(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_FNAME,body.getParent().getParentFName(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_OCUPATION,body.getParent().getOccupation(),context);
+
+        SharedPref.parentData = body.getParent();
+
+        Log.e("getParentOf",body.getParent().getParentOf());
+        implement.getStudent(body.getParent().getParentOf(),callback);
+
+
+
+    }
+
+    @Override
+    public void onErrorGetParentDetails(String message) {
+        dialog.showMessage(context,dialog.NO_Internet_title, message,1);
+    }
+
+    @Override
+    public void onSuccessGetStudentDetails(StudentDetails body) {
+        SharedPref.studentData = body.getStudent();
+
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onErrorGetStudentDetails(String s) {
+
+    }
+
+    @Override
+    public void onSuccessGetGuidanceDetails(GuidanceDetails body) {
+
+    }
+
+    @Override
+    public void onErrorGetGuidanceDetails(String s) {
+
+    }
+
+    @Override
+    public void onSuccessGetEmergencyContactDetails(EmergencyContactDetails body) {
+
+    }
+
+    @Override
+    public void onErrorGetEmergencyContactDetails(String s) {
+
     }
 
 

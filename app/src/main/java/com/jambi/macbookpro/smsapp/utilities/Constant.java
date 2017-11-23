@@ -5,8 +5,9 @@ package com.jambi.macbookpro.smsapp.utilities;
  */
 
 public class Constant {
-    public static String ADMIN = "0";
-    public static String GUIDANCE = "2";
-    public static String PARENT = "3";
+    public static String USERTYPE_ADMIN = "0";
+    public static String USERTYPE_GUIDANCE = "1";
+    public static String USERTYPE_PARENT = "2";
 
+    public static String LOGIN_DETAILS = "LOGIN_DETAILS";
 }

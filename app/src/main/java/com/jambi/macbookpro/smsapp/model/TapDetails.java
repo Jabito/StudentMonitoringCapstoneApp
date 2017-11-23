@@ -1,16 +1,16 @@
 package com.jambi.macbookpro.smsapp.model;
 
-import com.jambi.macbookpro.smsapp.model.User;
+import java.util.ArrayList;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by IPC on 11/23/2017.
  */
 
-public class LogInDetails {
+public class TapDetails {
 
     private String responseDesc;
     private String responseCode;
-    private User user;
+    private ArrayList<TapLog> tapListDetails;
 
     public String getResponseDesc() {
         return responseDesc;
@@ -28,11 +28,11 @@ public class LogInDetails {
         this.responseCode = responseCode;
     }
 
-    public User getUser() {
-        return user;
+    public ArrayList<TapLog> getTapListDetails() {
+        return tapListDetails;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTapListDetails(ArrayList<TapLog> tapListDetails) {
+        this.tapListDetails = tapListDetails;
     }
 }

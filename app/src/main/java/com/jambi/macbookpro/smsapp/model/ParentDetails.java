@@ -1,16 +1,14 @@
 package com.jambi.macbookpro.smsapp.model;
 
-import com.jambi.macbookpro.smsapp.model.User;
-
 /**
- * Created by IPC on 11/22/2017.
+ * Created by IPC on 11/23/2017.
  */
 
-public class LogInDetails {
+public class ParentDetails {
 
     private String responseDesc;
     private String responseCode;
-    private User user;
+    private Parent parent;
 
     public String getResponseDesc() {
         return responseDesc;
@@ -28,11 +26,11 @@ public class LogInDetails {
         this.responseCode = responseCode;
     }
 
-    public User getUser() {
-        return user;
+    public Parent getParent() {
+        return parent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }

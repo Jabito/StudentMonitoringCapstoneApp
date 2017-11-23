@@ -6,13 +6,13 @@ import java.util.Date;
  * Created by IPC on 11/22/2017.
  */
 
-public class studentModel {
+public class Student {
 
     private String id;
     private String firstName;
     private String lastName;
     private String middleName;
-    private Date bday;
+    private String bday;
     private String place;
     private Integer gender;
     private String citizenship;
@@ -27,9 +27,9 @@ public class studentModel {
     private String rfid;
     private Boolean isEnrolled;
     private String createdBy;
-    private Date createdOn;
+    private String createdOn;
     private String updatedBy;
-    private Date updatedOn;
+    private String updatedOn;
 
 
     public String getId() {
@@ -64,13 +64,7 @@ public class studentModel {
         this.middleName = middleName;
     }
 
-    public Date getBday() {
-        return bday;
-    }
 
-    public void setBday(Date bday) {
-        this.bday = bday;
-    }
 
     public String getPlace() {
         return place;
@@ -184,13 +178,7 @@ public class studentModel {
         this.createdBy = createdBy;
     }
 
-    public Date getCreatedOn() {
-        return createdOn;
-    }
 
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
 
     public String getUpdatedBy() {
         return updatedBy;
@@ -200,11 +188,27 @@ public class studentModel {
         this.updatedBy = updatedBy;
     }
 
-    public Date getUpdatedOn() {
+    public String getBday() {
+        return bday;
+    }
+
+    public void setBday(String bday) {
+        this.bday = bday;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(String updatedOn) {
         this.updatedOn = updatedOn;
     }
 }
