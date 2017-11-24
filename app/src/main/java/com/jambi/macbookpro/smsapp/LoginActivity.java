@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.jambi.macbookpro.smsapp.callback.LoginCallback;
 import com.jambi.macbookpro.smsapp.implement.LoginImplement;
 import com.jambi.macbookpro.smsapp.model.EmergencyContactDetails;
@@ -18,6 +19,8 @@ import com.jambi.macbookpro.smsapp.model.LogInDetails;
 import com.jambi.macbookpro.smsapp.model.ParentDetails;
 import com.jambi.macbookpro.smsapp.model.StudentDetails;
 import com.jambi.macbookpro.smsapp.utilities.CustomDialog;
+import com.jambi.macbookpro.smsapp.utilities.FireBaseNotification;
+import com.jambi.macbookpro.smsapp.utilities.FirebaseIDService;
 import com.jambi.macbookpro.smsapp.utilities.Loader;
 import com.jambi.macbookpro.smsapp.utilities.NetworkTest;
 import com.jambi.macbookpro.smsapp.utilities.SharedPref;
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     LoginCallback callback;
     Loader loader;
     CustomDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         ButterKnife.bind(this);
         loader.setPropertes();
         button_signin.setOnClickListener(this);
+
+
+
+        edit_username.setText(FirebaseInstanceId.getInstance().getToken());
+
     }
 
     @OnClick({R.id.button_signin})
@@ -89,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     public void onSuccessSignIn(LogInDetails body) {
         SharedPref.userData = body.getUser();
 //        implement.getParent(body.getUser().getId(),callback);
-        implement.getParent(body.getUser().getId(),callback);
+        implement.getParent("parent1230",callback);
 
 
     }

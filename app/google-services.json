@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "871885290328",
+    "firebase_url": "https://aquajmt-2ad8f.firebaseio.com",
+    "project_id": "aquajmt-2ad8f"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871885290328:android:0c8f3606963a553c",
+        "android_client_info": {
+          "package_name": "com.jambi.macbookpro.smsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871885290328-vc4otpotkl6l6onhici5ebeeut87hc8e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jambi.macbookpro.smsapp",
+            "certificate_hash": "6211f4575edf828b2fcba478afc1e34faa8ccd0d"
+          }
+        },
+        {
+          "client_id": "871885290328-i1iojc3m53janl5j3p1shm361f0ihvpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxpx5C2liL3Yp01dPS5UZW5T9zC_fRnkA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871885290328-i1iojc3m53janl5j3p1shm361f0ihvpj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
