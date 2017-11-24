@@ -10,7 +10,9 @@ public class LogInDetails {
 
     private String responseDesc;
     private String responseCode;
-    private User user;
+    private User User;
+    private Guidance Guidance;
+    private Parent Parent;
 
 
     public String getResponseDesc() {
@@ -29,11 +31,27 @@ public class LogInDetails {
         this.responseCode = responseCode;
     }
 
-    public User getUser() {
-        return user;
+    public com.jambi.macbookpro.smsapp.model.User getUser() {
+        return User;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(com.jambi.macbookpro.smsapp.model.User user) {
+        User = user;
+    }
+
+    public com.jambi.macbookpro.smsapp.model.Guidance getGuidance() {
+        return Guidance;
+    }
+
+    public void setGuidance(com.jambi.macbookpro.smsapp.model.Guidance guidance) {
+        Guidance = guidance;
+    }
+
+    public com.jambi.macbookpro.smsapp.model.Parent getParent() {
+        return Parent;
+    }
+
+    public void setParent(com.jambi.macbookpro.smsapp.model.Parent parent) {
+        Parent = parent;
     }
 }

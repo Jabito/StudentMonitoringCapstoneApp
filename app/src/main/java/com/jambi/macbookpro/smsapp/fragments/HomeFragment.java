@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jambi.macbookpro.smsapp.R;
+import com.jambi.macbookpro.smsapp.model.Parent;
+import com.jambi.macbookpro.smsapp.model.Student;
+import com.jambi.macbookpro.smsapp.utilities.SharedPref;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by macbookpro on 9/5/17.
@@ -15,6 +20,8 @@ import com.jambi.macbookpro.smsapp.R;
 
 public class HomeFragment extends Fragment {
 
+    Parent parent;
+    Student student;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +32,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this,view);
+        parent = SharedPref.parentData;
+        student = SharedPref.studentData;
 
         return view;
     }

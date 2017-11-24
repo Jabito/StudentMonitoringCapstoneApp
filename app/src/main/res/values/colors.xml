@@ -6,8 +6,6 @@
     <color name="midnightBlue">#191970</color>
     <color name="yellow">#ffff00</color>
     <color name="antiqueWhite">#faebd7</color>
-<<<<<<< Updated upstream
-=======
     <color name="light_grey">#ddd</color>
 
 
@@ -15,6 +13,4 @@
     <color name="_grey">#37474f</color>
     <color name="BLACK">#000000</color>
     <color name="WHITE">#FFFFFF</color>
-
->>>>>>> Stashed changes
 </resources>
