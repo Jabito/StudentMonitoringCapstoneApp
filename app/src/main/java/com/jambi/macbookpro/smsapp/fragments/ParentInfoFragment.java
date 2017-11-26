@@ -1,5 +1,6 @@
 package com.jambi.macbookpro.smsapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,8 +39,7 @@ public class ParentInfoFragment extends Fragment {
     TextView tv_last_update;
 
 
-    Parent parent;
-
+    Context context;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +50,23 @@ public class ParentInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent_info, container, false);
         ButterKnife.bind(this,view);
-        parent = SharedPref.parentData;
+        context = getContext();
 
 //        tv_last_update.setText(parent.getUpdatedOn());
+        String studentName = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,context) +", "+SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_firstName,context) + " " + SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_middleName,context);
+        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+        String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
+        String parentContact = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, context);
+        String parentRelationship = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, context);
+
+
+
         tv_last_update.setText("Last Update : 11/23/2017");
-        tv_name.setText(parent.getParentLName() +", "+parent.getParentFName());
-        tv_desc.setText(parent.getOccupation());
-        tv_parent_of.setText(parent.getParentOf());
-        tv_contact.setText(parent.getContactNo());
+        tv_name.setText(parentName);
+        tv_desc.setText(parentOccupation);
+        tv_parent_of.setText(studentName);
+        tv_contact.setText(parentContact);
+        tv_relationship.setText(parentRelationship);
         return view;
     }
 }

@@ -28,4 +28,10 @@ public class LoginImplement {
     public void getStudent(String parentOf, LoginCallback callback) {
         APICall.getStudent(parentOf, callback);
     }
+
+    public void getEmergencyContact(String id, LoginCallback callback) {
+        APICall.getEmergencyContact(id, callback);
+    }
+
+
 }

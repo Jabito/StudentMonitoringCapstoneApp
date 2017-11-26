@@ -15,13 +15,14 @@
 
 
     <string name="announcement">Announcement!</string>
+    <string name="announcement_">Announcement</string>
     <string name="message_announcement">Lorem ipsum dolor sit amet, \n consecutor adipising elit, sed \n do euisomod tempor incidunt ut.</string>
+    <string name="no_net"> No Internet Connection</string>
 
     <string name="sample">Sample</string>
 
     <string name="read_more">Read more</string>
     <string name="read_less">Read less</string>
-
 
 
 </resources>

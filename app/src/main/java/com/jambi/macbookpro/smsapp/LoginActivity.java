@@ -57,8 +57,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         dialog = new CustomDialog();
         ButterKnife.bind(this);
         loader.setPropertes();
-        button_signin.setOnClickListener(this);
 
+
+        button_signin.setOnClickListener(this);
 
     }
 
@@ -79,8 +80,8 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
                     loader.startLoad();
                     if (NetworkTest.isOnline(context)) {
                         implement.getSignInData(username, password, callback);
-                    }else {
-                        dialog.showMessage(context,dialog.NO_Internet_title,dialog.NO_Internet,1);
+                    } else {
+                        dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
                     }
 
                 }
@@ -95,9 +96,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     public void onSuccessSignIn(LogInDetails body) {
         SharedPref.userData = body.getUser();
 //        implement.getParent(body.getUser().getId(),callback);
-
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.USER_ID,body.getUser().getId(),context);
-        implement.getParent(body.getUser().getId(),callback);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);
+        if (NetworkTest.isOnline(context)) {
+            implement.getParent(body.getUser().getId(), callback);
+        } else {
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+        }
 
 
     }
@@ -105,57 +110,74 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     @Override
     public void onErrorSignIn(String message) {
         loader.stopLoad();
-        dialog.showMessage(context,dialog.NO_Internet_title, message,1);
+        dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
     }
 
     @Override
     public void onSuccessGetParentDetails(ParentDetails body) {
-        loader.stopLoad();
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_PARENT_OF,body.getParent().getParentOf(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_LNAME,body.getParent().getParentLName(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_FNAME,body.getParent().getParentFName(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_OCUPATION,body.getParent().getOccupation(),context);
-
         SharedPref.parentData = body.getParent();
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, body.getParent().getParentOf(), context);
+//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, body.getParent().getParentLName(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, body.getParent().getParentFName(), context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_OCUPATION,body.getParent().getOccupation(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
 
-        Log.e("getParentOf",body.getParent().getParentOf());
-//        implement.getStudent(body.getParent().getParentOf(),callback);
+        Log.e("getParentOf", body.getParent().getParentOf());
+        if (NetworkTest.isOnline(context)) {
+            implement.getStudent(body.getParent().getParentOf(), callback);
+        } else {
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+        }
 
 
-        Intent intent = new Intent(this, NavigationActivity.class);
-        startActivity(intent);
     }
 
     @Override
     public void onErrorGetParentDetails(String message) {
-        dialog.showMessage(context,dialog.NO_Internet_title, message,1);
+        dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
     }
 
     @Override
     public void onSuccessGetStudentDetails(StudentDetails body) {
         SharedPref.studentData = body.getStudent();
+
+
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_id,body.getStudent().getId(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,body.getStudent().getLastName(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_firstName,body.getStudent().getFirstName(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_middleName,body.getStudent().getMiddleName(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_section,body.getStudent().getSection(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_contactNo,body.getStudent().getContactNo(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_emergencyContact,body.getStudent().getEmergencyContact(),context);
+
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.SESSION_ON,"isLogged",context);
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
+        finish();
+        //TODO WILL USE IF EMERGENCY CAN BE RETRIEVE
+//        if (NetworkTest.isOnline(context)) {
+//            implement.getEmergencyContact(body.getParent().getParentOf(), callback);
+//        } else {
+//            loader.stopLoad();
+//            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+//        }
+
     }
 
     @Override
-    public void onErrorGetStudentDetails(String s) {
+    public void onErrorGetStudentDetails(String message) {
+        dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
 
     }
 
-    @Override
-    public void onSuccessGetGuidanceDetails(GuidanceDetails body) {
-
-    }
-
-    @Override
-    public void onErrorGetGuidanceDetails(String s) {
-
-    }
 
     @Override
     public void onSuccessGetEmergencyContactDetails(EmergencyContactDetails body) {
+
 
     }
 

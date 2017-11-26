@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, View
             loader.stopLoad();
             btn_refresh.setVisibility(View.VISIBLE);
             tv_display_announcement.setVisibility(View.GONE);
-            tv_refresh.setText(dialog.NO_Internet);
+            tv_refresh.setText(context.getString(R.string.no_net));
             rv_announcement.setVisibility(View.GONE);
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
         }

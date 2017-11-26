@@ -110,7 +110,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             } else {
                 ll_title.setSelected(true);
 //                tv_index.setTextColor(context.getColor(R.color.white));
-                tv_index.setText(context.getString(R.string.announcement));
+                tv_index.setText((position + 2)+":"+ context.getString(R.string.announcement_));
                 tv_index_read.setText(context.getString(R.string.read_less));
                 expandable_layout.expand();
                 selectedItem = position;

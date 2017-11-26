@@ -150,7 +150,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Relationshio"
+                    android:text="Relationshiop"
                     android:textSize="@dimen/nav_text_size"/>
             </LinearLayout>
 

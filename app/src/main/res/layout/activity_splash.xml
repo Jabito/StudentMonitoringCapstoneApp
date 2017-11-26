@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/midnightBlue"
+    tools:context="com.jambi.macbookpro.smsapp.SplashActivity">
+
+
+    <ImageView
+        android:layout_width="@dimen/drawerWidth"
+        android:layout_height="@dimen/drawerWidth"
+        android:src="@drawable/school_logo" />
+
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:theme="@style/AppTheme.WhiteAccent" />
+
+</LinearLayout>

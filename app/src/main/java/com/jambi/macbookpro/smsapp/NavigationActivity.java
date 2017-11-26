@@ -90,11 +90,11 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 
-//        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
-//        String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
+        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+        String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
 
-        tv_name.setText(parent.getParentLName() +", " + parent.getParentLName());
-        tv_desc.setText(parent.getOccupation());
+        tv_name.setText(parentName);
+        tv_desc.setText(parentOccupation);
 
         tv_parent_info.setOnClickListener(this);
         btn_nav.setOnClickListener(this);
@@ -187,6 +187,11 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.nav_settings:
                 tv_header.setText(context.getString(R.string.action_settings));
+                fragment = null;
+                fragment = new MessagesFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
                 closeDrawer();
                 break;
             case R.id.nav_logout:
@@ -196,6 +201,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                SharedPref.setStringValue(SharedPref.USER,SharedPref.SESSION_ON,"",context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, "", context);

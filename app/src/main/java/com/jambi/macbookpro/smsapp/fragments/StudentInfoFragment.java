@@ -1,5 +1,6 @@
 package com.jambi.macbookpro.smsapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ public class StudentInfoFragment extends Fragment {
     TextView tv_last_update;
 
     Student student;
+    Context context;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +47,22 @@ public class StudentInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_info, container, false);
         ButterKnife.bind(this,view);
-        student = SharedPref.studentData;
+        context = getContext();
+
+
+        String studentName = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,context) +", "+SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_firstName,context) + " " + SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_middleName,context);
+        String studentId = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_id,context);
+        String studentSection = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_section,context);
+        String studentContact = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_contactNo,context);
+        String studentEmerContact = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_emergencyContact,context);
 
 //        tv_last_update.setText(student.getUpdatedOn());
         tv_last_update.setText("Last Update : 11/23/2017");
-        tv_name.setText(student.getLastName() +", "+student.getFirstName() +" "+ student.getMiddleName() );
-        tv_desc.setText(student.getId());
-        tv_section.setText(student.getSection());
-        tv_contact.setText(student.getContactNo());
-        tv_emergeny_contact.setText(student.getEmergencyContact());
+        tv_name.setText(studentName);
+        tv_desc.setText(studentId);
+        tv_section.setText(studentSection);
+        tv_contact.setText(studentContact);
+        tv_emergeny_contact.setText(studentEmerContact);
         return view;
     }
 }

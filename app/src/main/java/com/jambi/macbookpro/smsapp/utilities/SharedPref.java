@@ -22,7 +22,7 @@ public class SharedPref {
     public static Parent parentData;
     public static Student studentData;
 
-    //USED UPON RETRIEVAL OF PARENT`S INFORMATION
+    //USED UPON RETRIEVAL OF USER INFORMATION
     public static String USER_ID = "USER_ID";
 
     //USED UPON RETRIEVAL OF PARENT`S INFORMATION
@@ -34,6 +34,33 @@ public class SharedPref {
     public static String PARENT_CONTACT = "PARENT_CONTACT";
     public static String PARENT_OCUPATION = "PARENT_OCUPATION";
 
+
+    //USED UPON RETRIEVAL OF STUDENT`S INFORMATION
+    public static String STUDENT_id = "STUDENT_id";
+    public static String STUDENT_firstName = "STUDENT_lastName";
+    public static String STUDENT_lastName = "STUDENT_lastName";
+    public static String STUDENT_middleName = "STUDENT_middleName";
+    public static String STUDENT_bday = "STUDENT_bday";
+    public static String STUDENT_place = "STUDENT_place";
+    public static String STUDENT_gender = "STUDENT_gender";
+    public static String STUDENT_citizenship = "STUDENT_citizenship";
+    public static String STUDENT_address = "STUDENT_address";
+    public static String STUDENT_contactNo = "STUDENT_contactNo";
+    public static String STUDENT_emergencyContact = "STUDENT_emergencyContact";
+    public static String STUDENT_gradeLvlId = "STUDENT_gradeLvlId";
+    public static String STUDENT_schoolYear = "STUDENT_schoolYear";
+    public static String STUDENT_section = "STUDENT_section";
+    public static String STUDENT_isOldStudent = "STUDENT_isOldStudent";
+    public static String STUDENT_isTransferee = "STUDENT_isTransferee";
+    public static String STUDENT_rfid = "STUDENT_rfid";
+    public static String STUDENT_isEnrolled = "STUDENT_isEnrolled";
+    public static String STUDENT_createdBy = "STUDENT_createdBy";
+    public static String STUDENT_createdOn = "STUDENT_createdOn";
+    public static String STUDENT_updatedBy = "STUDENT_updatedBy";
+    public static String STUDENT_updatedOn = "STUDENT_updatedOn";
+
+
+    public static String SESSION_ON = "SESSION_ON";
 
     public void setBoolValue(String Key, boolean value, Context context) {
 
@@ -83,7 +110,7 @@ public class SharedPref {
         return preferences.getBoolean(specID, false);
     }
 
-    public static   String getStringValue(String Key, String specID, Context context) {
+    public static String getStringValue(String Key, String specID, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
         return preferences.getString(specID, "null");
     }

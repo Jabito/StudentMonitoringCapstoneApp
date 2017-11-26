@@ -29,7 +29,7 @@
             android:id="@+id/imageButton"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/yellow" />
+            android:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 
 

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -17,6 +20,8 @@ import com.jambi.macbookpro.smsapp.implement.AttendanceLogImplement;
 import com.jambi.macbookpro.smsapp.model.Student;
 import com.jambi.macbookpro.smsapp.model.TapDetails;
 import com.jambi.macbookpro.smsapp.model.TapLog;
+import com.jambi.macbookpro.smsapp.utilities.CustomDialog;
+import com.jambi.macbookpro.smsapp.utilities.NetworkTest;
 import com.jambi.macbookpro.smsapp.utilities.SharedPref;
 
 import java.util.ArrayList;
@@ -28,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by macbookpro on 9/5/17.
  */
 
-public class AttendanceFragment extends Fragment implements TapCallback {
+public class AttendanceFragment extends Fragment implements TapCallback, View.OnClickListener {
 
     @BindView(R.id.list_date)
     ListView list_date;
@@ -36,6 +41,16 @@ public class AttendanceFragment extends Fragment implements TapCallback {
     ListView list_time;
     @BindView(R.id.list_type)
     ListView list_type;
+    @BindView(R.id.cv_log)
+    CardView cv_log;
+
+    @BindView(R.id.ll_noNet)
+    LinearLayout ll_noNet;
+    @BindView(R.id.btn_refresh)
+    Button btn_refresh;
+
+
+
 
 
     Context context;
@@ -47,8 +62,7 @@ public class AttendanceFragment extends Fragment implements TapCallback {
     ArrayList<String> arrayListDate;
     ArrayList<String> arrayListTime;
     ArrayList<String> arrayListType;
-
-    Student student;
+    CustomDialog dialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,36 +75,34 @@ public class AttendanceFragment extends Fragment implements TapCallback {
         ButterKnife.bind(this,view);
         context = getContext();
         callback =this;
+        dialog = new CustomDialog();
         implement = new AttendanceLogImplement(context);
-        student = SharedPref.studentData;
         arrayListDate = new ArrayList<>();
         arrayListTime = new ArrayList<>();
         arrayListType = new ArrayList<>();
+        btn_refresh.setOnClickListener(this);
 
+        getTapLog();
 
-
-        implement.getTapLogOfStudent(student.getId(),callback);
-
-
-//        adapterListDate = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListDate);
-//        list_date.setAdapter(adapterListDate);
-//        list_date.setEnabled(false);
-//        setListViewHeightBasedOnItems(list_date);
-//
-//        adapterListTime = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListTime);
-//        list_time.setAdapter(adapterListTime);
-//        list_time.setEnabled(false);
-//        setListViewHeightBasedOnItems(list_time);
-//
-//        adapterListType = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListType);
-//        list_type.setAdapter(adapterListType);
-//        list_type.setEnabled(false);
-//        setListViewHeightBasedOnItems(list_type);
         return view;
+    }
+
+    private void getTapLog() {
+        if (NetworkTest.isOnline(context)) {
+            String studentId = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_id,context);
+            implement.getTapLogOfStudent(studentId,callback);
+        } else {
+            ll_noNet.setVisibility(View.VISIBLE);
+            cv_log.setVisibility(View.GONE);
+            dialog.showMessage(context, dialog.HOLD_ON_title, dialog.NO_Internet, 1);
+        }
     }
 
     @Override
     public void onSuccessTapDetails(TapDetails body) {
+        ll_noNet.setVisibility(View.GONE);
+        cv_log.setVisibility(View.VISIBLE);
+
 
         arrayListDate.clear();
         arrayListTime.clear();
@@ -147,7 +159,9 @@ public class AttendanceFragment extends Fragment implements TapCallback {
 
     @Override
     public void onErrorTapDetails(String s) {
-
+        ll_noNet.setVisibility(View.VISIBLE);
+        cv_log.setVisibility(View.GONE);
+        dialog.showMessage(context, dialog.NO_Internet_title, s, 1);
     }
 
 
@@ -184,5 +198,14 @@ public class AttendanceFragment extends Fragment implements TapCallback {
             return false;
         }
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case  R.id.btn_refresh:
+                getTapLog();
+                break;
+        }
     }
 }

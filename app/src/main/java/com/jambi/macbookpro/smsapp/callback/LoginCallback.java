@@ -14,6 +14,7 @@ import com.jambi.macbookpro.smsapp.model.StudentDetails;
 public interface LoginCallback {
 
     void onSuccessSignIn(LogInDetails body);
+
     void onErrorSignIn(String message);
 
     void onSuccessGetParentDetails(ParentDetails body);
@@ -23,10 +24,6 @@ public interface LoginCallback {
     void onSuccessGetStudentDetails(StudentDetails body);
 
     void onErrorGetStudentDetails(String s);
-
-    void onSuccessGetGuidanceDetails(GuidanceDetails body);
-
-    void onErrorGetGuidanceDetails(String s);
 
     void onSuccessGetEmergencyContactDetails(EmergencyContactDetails body);
 
