@@ -60,7 +60,11 @@ public class SharedPref {
     public static String STUDENT_updatedOn = "STUDENT_updatedOn";
 
 
+    //used for checking of session
     public static String SESSION_ON = "SESSION_ON";
+
+    //used for checking of session
+    public static String SMS_TOGGLE = "SMS_TOGGLE";
 
     public void setBoolValue(String Key, boolean value, Context context) {
 

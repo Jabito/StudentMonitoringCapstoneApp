@@ -3,6 +3,7 @@ package com.jambi.macbookpro.smsapp.apiCalls;
 import android.util.Log;
 
 import com.jambi.macbookpro.smsapp.callback.AnnouncementCallback;
+import com.jambi.macbookpro.smsapp.callback.SettingsCallback;
 import com.jambi.macbookpro.smsapp.callback.TapCallback;
 import com.jambi.macbookpro.smsapp.model.AnnouncementDetails;
 import com.jambi.macbookpro.smsapp.model.EmergencyContactDetails;
@@ -222,5 +223,33 @@ public class APICall {
                 });
     }
 
+    public static void setToggleSms(Boolean isChecked, String id, final SettingsCallback callback) {
+        AppInterface appInterface;
+        appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
+        appInterface.setToggleSms(id,isChecked)
+                .enqueue(new Callback<AnnouncementDetails>() {
+                    @Override
+                    public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
+                        try {
+                            if (response.body() != null) {
+                                callback.onSuccess(response.body());
+                            } else {
+                                callback.onError("no response to server");
+                            }
+                        } catch (Exception e) {
+                            callback.onError("");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnnouncementDetails> call, Throwable t) {
+                        try {
+                            callback.onError(t.getMessage());
+                        } catch (Exception e) {
+                            callback.onError("");
+                        }
+                    }
+                });
+    }
 }
 

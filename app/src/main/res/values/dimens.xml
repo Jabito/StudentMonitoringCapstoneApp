@@ -18,6 +18,7 @@
     <dimen name="alert_circle_width">90dp</dimen>
     <dimen name="alert_circle_height">90dp</dimen>
 
+    <dimen name="image_size">15dp</dimen>
 
     <dimen name="max_margin">30dp</dimen>
     <dimen name="margin">20dp</dimen>

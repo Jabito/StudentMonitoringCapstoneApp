@@ -21,6 +21,7 @@ import com.jambi.macbookpro.smsapp.fragments.AttendanceFragment;
 import com.jambi.macbookpro.smsapp.fragments.HomeFragment;
 import com.jambi.macbookpro.smsapp.fragments.MessagesFragment;
 import com.jambi.macbookpro.smsapp.fragments.ParentInfoFragment;
+import com.jambi.macbookpro.smsapp.fragments.SettingsFragment;
 import com.jambi.macbookpro.smsapp.fragments.StudentInfoFragment;
 import com.jambi.macbookpro.smsapp.model.Parent;
 import com.jambi.macbookpro.smsapp.model.User;
@@ -188,7 +189,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             case R.id.nav_settings:
                 tv_header.setText(context.getString(R.string.action_settings));
                 fragment = null;
-                fragment = new MessagesFragment();
+                fragment = new SettingsFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
                 fragmentTransaction.commit();

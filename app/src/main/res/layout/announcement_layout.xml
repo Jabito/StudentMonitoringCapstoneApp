@@ -21,7 +21,7 @@
             android:elevation="6dp"
             android:foreground="?selectableItemBackground"
             android:padding="16dp"
-            android:layout_weight="1"
+            android:layout_weight=".4"
             android:textColor="@color/BLACK" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:padding="16dp"
             android:gravity="right"
             android:text="@string/read_more"
-            android:layout_weight="1"
+            android:layout_weight=".67"
             android:textColor="@color/BLACK" />
 
 

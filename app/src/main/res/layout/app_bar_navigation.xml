@@ -32,7 +32,8 @@
                     android:background="@android:color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_black" />
+                    android:src="@drawable/ic_menu_black"
+                    android:tint="@color/WHITE"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,7 +42,8 @@
                     android:layout_weight=".1"
                     android:id="@+id/tv_header"
                     android:textSize="@dimen/text_main"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    />
 
 
             </LinearLayout>

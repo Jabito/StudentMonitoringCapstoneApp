@@ -55,4 +55,10 @@ public interface AppInterface {
 
     @GET("/app/getAnnouncements")
     Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
+
+
+
+    @POST("/app/toggleSMS")
+    Call<AnnouncementDetails> setToggleSms(@Query("parentId") String parentId,
+                                           @Query("mode") Boolean mode);
 }
