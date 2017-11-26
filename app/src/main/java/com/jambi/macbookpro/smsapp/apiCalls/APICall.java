@@ -2,7 +2,9 @@ package com.jambi.macbookpro.smsapp.apiCalls;
 
 import android.util.Log;
 
+import com.jambi.macbookpro.smsapp.callback.AnnouncementCallback;
 import com.jambi.macbookpro.smsapp.callback.TapCallback;
+import com.jambi.macbookpro.smsapp.model.AnnouncementDetails;
 import com.jambi.macbookpro.smsapp.model.EmergencyContactDetails;
 import com.jambi.macbookpro.smsapp.callback.LoginCallback;
 import com.jambi.macbookpro.smsapp.model.ParentDetails;
@@ -40,11 +42,9 @@ public class APICall {
 //                                }else {
 //                                    callback.onErrorSignIn("Invalid UserType");
 //                                }
-                            }else {
+                            } else {
                                 callback.onErrorSignIn("Invalid Credentials");
                             }
-
-                            Log.e("success1 getLogIn", "success");
                         } else {
                             callback.onErrorSignIn(ErrorMessage.setErrorMessage("no response to server"));
                             Log.e("error1", "error1");
@@ -190,6 +190,36 @@ public class APICall {
                     }
                 });
 
+    }
+
+
+    public static void getAnnouncements(String parentId, final AnnouncementCallback callback) {
+        AppInterface appInterface;
+        appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
+        appInterface.getAnnouncements(parentId)
+                .enqueue(new Callback<AnnouncementDetails>() {
+                    @Override
+                    public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
+                        try {
+                            if (response.body() != null) {
+                                callback.onSuccess(response.body());
+                            } else {
+                                callback.onError("no response to server");
+                            }
+                        } catch (Exception e) {
+                            callback.onError("");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnnouncementDetails> call, Throwable t) {
+                        try {
+                            callback.onError(t.getMessage());
+                        } catch (Exception e) {
+                            callback.onError("");
+                        }
+                    }
+                });
     }
 
 }

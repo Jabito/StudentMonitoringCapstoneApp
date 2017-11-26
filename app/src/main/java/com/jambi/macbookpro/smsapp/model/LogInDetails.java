@@ -31,27 +31,27 @@ public class LogInDetails {
         this.responseCode = responseCode;
     }
 
-    public com.jambi.macbookpro.smsapp.model.User getUser() {
+    public User getUser() {
         return User;
     }
 
-    public void setUser(com.jambi.macbookpro.smsapp.model.User user) {
+    public void setUser(User user) {
         User = user;
     }
 
-    public com.jambi.macbookpro.smsapp.model.Guidance getGuidance() {
+    public Guidance getGuidance() {
         return Guidance;
     }
 
-    public void setGuidance(com.jambi.macbookpro.smsapp.model.Guidance guidance) {
+    public void setGuidance(Guidance guidance) {
         Guidance = guidance;
     }
 
-    public com.jambi.macbookpro.smsapp.model.Parent getParent() {
+    public Parent getParent() {
         return Parent;
     }
 
-    public void setParent(com.jambi.macbookpro.smsapp.model.Parent parent) {
+    public void setParent(Parent parent) {
         Parent = parent;
     }
 }

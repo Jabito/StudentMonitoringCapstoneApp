@@ -1,5 +1,6 @@
 package com.jambi.macbookpro.smsapp.services;
 
+import com.jambi.macbookpro.smsapp.model.AnnouncementDetails;
 import com.jambi.macbookpro.smsapp.model.LogIn;
 import com.jambi.macbookpro.smsapp.model.LogInDetails;
 
@@ -52,6 +53,6 @@ public interface AppInterface {
     @GET("/app/getTapLogOfStudent")
     Call<TapDetails> getTapLogOfStudent(@Query("studentId") String studentId);
 
-
-
+    @GET("/app/getAnnouncements")
+    Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
 }

@@ -18,10 +18,8 @@ public class LoginImplement {
     }
 
     public void getSignInData(String username, String password, LoginCallback callback) {
-        APICall.getLogIn(username,password, callback);
+        APICall.getLogIn(username, password, callback);
     }
-
-
 
     public void getParent(String id, LoginCallback callback) {
         APICall.getParent(id, callback);

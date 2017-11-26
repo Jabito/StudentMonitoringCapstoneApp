@@ -175,7 +175,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                 closeDrawer();
                 break;
 
-
+            //not used
             case R.id.nav_messages:
                 tv_header.setText(context.getString(R.string.message_));
                 fragment = null;

@@ -23,6 +23,9 @@ public class SharedPref {
     public static Student studentData;
 
     //USED UPON RETRIEVAL OF PARENT`S INFORMATION
+    public static String USER_ID = "USER_ID";
+
+    //USED UPON RETRIEVAL OF PARENT`S INFORMATION
     public static String PARENT_ID = "PARENT_ID";
     public static String PARENT_PARENT_OF = "PARENT_PARENT_OF";
     public static String PARENT_RELATIONSHIP = "PARENT_RELATIONSHIP";

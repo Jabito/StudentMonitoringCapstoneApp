@@ -60,9 +60,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         button_signin.setOnClickListener(this);
 
 
-
-        edit_username.setText(FirebaseInstanceId.getInstance().getToken());
-
     }
 
     @OnClick({R.id.button_signin})
@@ -78,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
                 } else if (password.isEmpty()) {
                     edit_password.setError("Enter password");
                 } else {
-                    loader.setMessage("Signing In.. \n Please Wait");
+                    loader.setMessage("Signing In...\nPlease Wait");
                     loader.startLoad();
                     if (NetworkTest.isOnline(context)) {
                         implement.getSignInData(username, password, callback);
@@ -98,7 +95,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     public void onSuccessSignIn(LogInDetails body) {
         SharedPref.userData = body.getUser();
 //        implement.getParent(body.getUser().getId(),callback);
-        implement.getParent("parent1230",callback);
+
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.USER_ID,body.getUser().getId(),context);
+        implement.getParent(body.getUser().getId(),callback);
 
 
     }
@@ -113,20 +112,21 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     public void onSuccessGetParentDetails(ParentDetails body) {
         loader.stopLoad();
 //        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_PARENT_OF,body.getParent().getParentOf(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_PARENT_OF,body.getParent().getParentOf(),context);
 //        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_LNAME,body.getParent().getParentLName(),context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_FNAME,body.getParent().getParentFName(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_LNAME,body.getParent().getParentLName(),context);
+        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_FNAME,body.getParent().getParentFName(),context);
 //        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
 //        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_OCUPATION,body.getParent().getOccupation(),context);
 
         SharedPref.parentData = body.getParent();
 
         Log.e("getParentOf",body.getParent().getParentOf());
-        implement.getStudent(body.getParent().getParentOf(),callback);
+//        implement.getStudent(body.getParent().getParentOf(),callback);
 
 
-
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -137,9 +137,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     @Override
     public void onSuccessGetStudentDetails(StudentDetails body) {
         SharedPref.studentData = body.getStudent();
-
-        Intent intent = new Intent(this, NavigationActivity.class);
-        startActivity(intent);
     }
 
     @Override
