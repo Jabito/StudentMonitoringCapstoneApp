@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+
 import com.jambi.macbookpro.smsapp.model.EmergencyContactDetails;
 import com.jambi.macbookpro.smsapp.model.GuidanceDetails;
 import com.jambi.macbookpro.smsapp.model.LogInDetails;
@@ -27,8 +28,8 @@ import retrofit2.http.Query;
 public interface AppInterface {
 
 
-    String ENDPOINT = "http://10.10.26.215:8080/";
-
+    //    String ENDPOINT = "http://10.10.26.215:8080/";
+    String ENDPOINT = "http://www.aquajmt.com:8080/";
 
     @POST("/app/loginUser")
     Call<LogInDetails> getUserLogin(@Query("username") String username,
@@ -55,7 +56,6 @@ public interface AppInterface {
 
     @GET("/app/getAnnouncements")
     Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
-
 
 
     @POST("/app/toggleSMS")

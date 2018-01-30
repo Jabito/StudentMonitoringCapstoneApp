@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         loader.setPropertes();
 
 
+        FirebaseInstanceId.getInstance().getId();
         button_signin.setOnClickListener(this);
 
     }
