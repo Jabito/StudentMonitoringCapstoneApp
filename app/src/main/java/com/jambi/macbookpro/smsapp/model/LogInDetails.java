@@ -14,7 +14,6 @@ public class LogInDetails {
     private Guidance Guidance;
     private Parent Parent;
 
-
     public String getResponseDesc() {
         return responseDesc;
     }

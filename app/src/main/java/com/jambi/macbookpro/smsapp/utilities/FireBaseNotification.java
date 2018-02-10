@@ -19,32 +19,7 @@ import com.jambi.macbookpro.smsapp.R;
 
 public class FireBaseNotification extends FirebaseMessagingService {
 
-    @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
 
-        Log.d("FCM SERVICE" ,remoteMessage.getFrom());
-        Log.d("notifcaiton" ,remoteMessage.getNotification().getBody());
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1410,
-                intent, PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.Builder notificationBuilder = new
-                NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_menu_black)
-                .setContentTitle("Student Monitoring")
-                .setContentText(remoteMessage.getNotification().getBody())
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager)
-                        getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(1410, notificationBuilder.build());
-
-    }
 
 
 }

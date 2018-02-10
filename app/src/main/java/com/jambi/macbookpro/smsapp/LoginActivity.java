@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 //        implement.getParent(body.getUser().getId(),callback);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);
         if (NetworkTest.isOnline(context)) {
-            implement.getParent(body.getUser().getId(), callback);
+            implement.getParent(body.getParent().getId(), callback);
         } else {
             loader.stopLoad();
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
@@ -119,7 +119,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.parentData = body.getParent();
         SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, body.getParent().getParentOf(), context);
-//        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, body.getParent().getParentLName(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, body.getParent().getParentFName(), context);
         SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
@@ -139,13 +138,14 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     @Override
     public void onErrorGetParentDetails(String message) {
+        loader.checkLoad();
         dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
     }
 
     @Override
     public void onSuccessGetStudentDetails(StudentDetails body) {
         SharedPref.studentData = body.getStudent();
-
+        loader.checkLoad();
 
         SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_id,body.getStudent().getId(),context);
         SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,body.getStudent().getLastName(),context);
@@ -171,6 +171,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     @Override
     public void onErrorGetStudentDetails(String message) {
+        loader.checkLoad();
         dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
 
     }

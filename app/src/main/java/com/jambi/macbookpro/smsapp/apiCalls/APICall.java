@@ -37,12 +37,6 @@ public class APICall {
                         if (response.body() != null) {
                             if (response.body().getResponseCode().equalsIgnoreCase("OK")) {
                                 callback.onSuccessSignIn(response.body());
-
-//                                if (response.body().getUser().getUserTypeId().equals(Constant.USERTYPE_PARENT)) {
-//                                    callback.onSuccessSignIn(response.body());
-//                                }else {
-//                                    callback.onErrorSignIn("Invalid UserType");
-//                                }
                             } else {
                                 callback.onErrorSignIn("Invalid Credentials");
                             }
@@ -75,11 +69,15 @@ public class APICall {
                     @Override
                     public void onResponse(Call<ParentDetails> call, Response<ParentDetails> response) {
                         if (response.body() != null) {
-                            callback.onSuccessGetParentDetails(response.body());
-                            Log.e("success getParent", "success");
+                            if (response.body().getResponseCode().equalsIgnoreCase("NOT_FOUND")) {
+                                callback.onErrorGetParentDetails("USER NOT FOUND");
+                            } else if (response.body().getResponseCode().equalsIgnoreCase("OK")) {
+                                callback.onSuccessGetParentDetails(response.body());
+                            } else if (response.body().getResponseCode().equalsIgnoreCase("UNAUTHORIZED")) {
+                                callback.onErrorGetParentDetails("UNAUTHORIZED USER");
+                            }
                         } else {
                             callback.onErrorGetParentDetails("no response to server");
-                            Log.e("error1 getParent", "error1");
                         }
                     }
 
@@ -226,7 +224,7 @@ public class APICall {
     public static void setToggleSms(Boolean isChecked, String id, final SettingsCallback callback) {
         AppInterface appInterface;
         appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
-        appInterface.setToggleSms(id,isChecked)
+        appInterface.setToggleSms(id, isChecked)
                 .enqueue(new Callback<AnnouncementDetails>() {
                     @Override
                     public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
