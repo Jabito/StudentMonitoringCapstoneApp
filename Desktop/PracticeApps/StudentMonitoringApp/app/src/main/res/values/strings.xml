@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">StudentMonitoringApp</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="home">Home</string>
+    <string name="action_settings">Settings</string>
+    <string name="attendanceLog">Attendance Logs </string>
+    <string name="parent_info">Parent Information</string>
+    <string name="student">Student Information</string>
+    <string name="greeting">Welcome User!</string>
+    <string name="message_">Messages</string>
+    <string name="logout">Logout</string>
+
+    <string name="settings">Settings</string>
+    <string name="announcement">Announcement!</string>
+    <string name="announcement_">Announcement</string>
+    <string name="message_announcement">Lorem ipsum dolor sit amet, \n consecutor adipising elit, sed \n do euisomod tempor incidunt ut.</string>
+    <string name="no_net"> No Internet Connection</string>
+
+    <string name="sample">Sample</string>
+
+    <string name="read_more">Read more</string>
+    <string name="read_less">Read less</string>
+    <string name="toggleSmsOn">Turn On Sms</string>
+    <string name="toggleSmsOff">Turn Off Sms</string>
+    <string name="notification_tag">Sms</string>
+</resources>
