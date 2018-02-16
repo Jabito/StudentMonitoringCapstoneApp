@@ -26,4 +26,10 @@
     <string name="toggleSmsOn">Turn On Sms</string>
     <string name="toggleSmsOff">Turn Off Sms</string>
     <string name="notification_tag">Sms</string>
+
+    <string name="sortBy">Sort By</string>
+    <string name="sortByMonth">Month</string>
+    <string name="sortByDay">Day</string>
+
+    <string name="pullDown">Pull down to refresh</string>
 </resources>

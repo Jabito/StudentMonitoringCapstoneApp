@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/fragment_attendance_logs"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/sub_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="@string/sortBy"
+            android:textAlignment="center"
+            android:textColor="@color/WHITE"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="#FFF"
+            android:backgroundTint="@color/colorAccent"
+            android:padding="5dp"
+            android:text="@string/sortByMonth"
+            android:textAlignment="center"
+            android:textColor="@color/WHITE"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF"
+            android:backgroundTint="@color/colorAccent"
+            android:padding="5dp"
+            android:text="@string/sortByDay"
+            android:textAlignment="center"
+            android:textColor="@color/WHITE"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

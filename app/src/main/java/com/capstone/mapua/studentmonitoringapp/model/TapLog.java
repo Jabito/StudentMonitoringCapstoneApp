@@ -33,4 +33,18 @@ public class TapLog {
     public void setLogDateTime(String logDateTime) {
         this.logDateTime = logDateTime;
     }
+
+    public TapLog() {
+    }
+
+    public TapLog(String rfid, String logType, String logDateTime) {
+        this.rfid = rfid;
+        this.logType = logType;
+        this.logDateTime = logDateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "rfid+ " + rfid + "logType+ " + logType + "logDateTime+ " + logDateTime;
+    }
 }
