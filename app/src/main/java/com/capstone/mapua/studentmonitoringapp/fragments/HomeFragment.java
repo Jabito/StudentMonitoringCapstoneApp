@@ -2,8 +2,10 @@ package com.capstone.mapua.studentmonitoringapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +17,15 @@ import android.widget.TextView;
 
 import com.capstone.mapua.studentmonitoringapp.R;
 import com.capstone.mapua.studentmonitoringapp.adapter.AnnouncementAdapter;
+import com.capstone.mapua.studentmonitoringapp.apiCalls.APICall;
 import com.capstone.mapua.studentmonitoringapp.callback.AnnouncementCallback;
+import com.capstone.mapua.studentmonitoringapp.database.DatabaseHandler;
 import com.capstone.mapua.studentmonitoringapp.implement.AnnouncementImplement;
 import com.capstone.mapua.studentmonitoringapp.model.Announcement;
 import com.capstone.mapua.studentmonitoringapp.model.AnnouncementDetails;
 import com.capstone.mapua.studentmonitoringapp.model.User;
 import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
+import com.capstone.mapua.studentmonitoringapp.utilities.DateConverter;
 import com.capstone.mapua.studentmonitoringapp.utilities.Loader;
 import com.capstone.mapua.studentmonitoringapp.utilities.NetworkTest;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
@@ -34,22 +39,18 @@ import butterknife.ButterKnife;
  * Created by macbookpro on 9/5/17.
  */
 
-public class HomeFragment extends Fragment implements AnnouncementCallback, View.OnClickListener {
+public class HomeFragment extends Fragment implements AnnouncementCallback, SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.tv_display_user)
     TextView tv_display_user;
-    @BindView(R.id.tv_display_announcement)
-    TextView tv_display_announcement;
+    @BindView(R.id.tv_announceLabel)
+    TextView tv_announceLabel;
+    @BindView(R.id.sr_swipe)
+    SwipeRefreshLayout sr_swipe;
 
     @BindView(R.id.rv_announcement)
     RecyclerView rv_announcement;
-
-    @BindView(R.id.tv_refresh)
-    TextView tv_refresh;
-    @BindView(R.id.btn_refresh)
-    Button btn_refresh;
-
 
 
     Context context;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, View
     Loader loader;
     User user;
     ArrayList<Announcement> announcementArrayList = new ArrayList<>();
+    DatabaseHandler databaseHandler;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,85 +75,80 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, View
         ButterKnife.bind(this, view);
         context = getContext();
         callback = this;
-        implement = new AnnouncementImplement(context);
+        databaseHandler = new DatabaseHandler(context);
+        implement = new AnnouncementImplement(context,databaseHandler,callback);
+        adapter = new AnnouncementAdapter(context,announcementArrayList);
+        rv_announcement.setLayoutManager(new LinearLayoutManager(context));
+        rv_announcement.setAdapter(adapter);
         dialog = new CustomDialog();
-        loader = new Loader(context);
-        loader.setPropertes();
-        btn_refresh.setOnClickListener(this);
+        sr_swipe.setColorSchemeResources(R.color.colorPrimary);
+        sr_swipe.setOnRefreshListener(this);
+
         user = SharedPref.userData;
 
-
         setParentName();
-        getLatestAnnouncement();
-
-
+        getCurrentAnnouncement();
         return view;
     }
 
-    private void setParentName() {
-        try{
-            String name = SharedPref.getStringValue(SharedPref.USER,SharedPref.PARENT_LNAME,context) + SharedPref.getStringValue(SharedPref.USER,SharedPref.PARENT_FNAME,context);
-            tv_display_user.setText("Welcome " + name);
-        }catch (Exception e){
-            tv_display_user.setText("Welcome");
-        }
-
-
+    private void getCurrentAnnouncement() {
+        announcementArrayList.clear();
+        announcementArrayList.addAll(databaseHandler.getAnnouncementList());
+        adapter.notifyDataSetChanged();
+        tv_announceLabel.setText(getText(R.string.announcement_) + "\nUpdated as of: "
+                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context));
     }
 
-    private void getLatestAnnouncement() {
-        if (NetworkTest.isOnline(context)) {
-            loader.setMessage("Loading...\nPlease Wait");
-            loader.startLoad();
-            implement.getAnnouncements(SharedPref.getStringValue(SharedPref.USER,SharedPref.USER_ID,context), callback);
-        } else {
-            loader.stopLoad();
-            btn_refresh.setVisibility(View.VISIBLE);
-            tv_display_announcement.setVisibility(View.GONE);
-            tv_refresh.setText(context.getString(R.string.no_net));
-            rv_announcement.setVisibility(View.GONE);
-            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+    private void setParentName() {
+        try {
+            String name = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) +", "
+                    + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+            tv_display_user.setText("Welcome " + name);
+        } catch (Exception e) {
+            tv_display_user.setText("Welcome");
         }
     }
 
     @Override
     public void onSuccess(AnnouncementDetails body) {
-        btn_refresh.setVisibility(View.GONE);
-        tv_display_announcement.setVisibility(View.VISIBLE);
-        tv_refresh.setText(context.getString(R.string.announcement));
-        rv_announcement.setVisibility(View.VISIBLE);
+        implement.getAnnouncements(body.getAnnouncements(), announcementArrayList);
 
-
-        announcementArrayList.clear();
-        for (int i = 0; i < body.getAnnouncements().size(); i++) {
-            if (i == 0) {
-                tv_display_announcement.setText(body.getAnnouncements().get(i).getMessage());
-            }else{
-                announcementArrayList.add(body.getAnnouncements().get(i));
-            }
-        }
-//        announcementArrayList.addAll(body.getAnnouncements());
-        adapter = new AnnouncementAdapter(rv_announcement, context, announcementArrayList);
-        rv_announcement.setLayoutManager(new LinearLayoutManager(context));
-        rv_announcement.setAdapter(adapter);
-        loader.stopLoad();
     }
 
     @Override
     public void onError(String s) {
-        loader.stopLoad();
+        if (sr_swipe != null)
+            sr_swipe.setRefreshing(false);
         dialog.showMessage(context, dialog.NO_Internet_title, s, 1);
     }
 
-
-
+    @Override
+    public void onSaveComplete(ArrayList<Announcement> announcementArrayList) {
+        SharedPref.LAST_ANNOUNCEMENT_UPDATE = "LAST_ANNOUNCEMENT_UPDATE";
+        this.announcementArrayList = announcementArrayList;
+        adapter.notifyDataSetChanged();
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, DateConverter.getCurrentDate(), context);
+        tv_announceLabel.setText(getText(R.string.announcement_) + "\nUpdated as of: "
+                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context));
+        if (sr_swipe != null)
+            sr_swipe.setRefreshing(false);
+    }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_refresh:
-                getLatestAnnouncement();
-                break;
-        }
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (NetworkTest.isOnline(context)) {
+                    String parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
+                    APICall.getAnnouncements(parentId, callback);
+                    sr_swipe.setRefreshing(true);
+                } else {
+                    dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+                    sr_swipe.setRefreshing(false);
+                }
+            }
+        }, 3000);
     }
 }

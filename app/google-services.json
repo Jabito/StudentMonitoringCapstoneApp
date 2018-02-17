@@ -8,50 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1021590070325:android:659cbb6904e9d551",
-        "android_client_info": {
-          "package_name": "com.capstone.mapua.studentmonitoringapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1021590070325-mefbelu0ae83j9o9q23onj6hu15ervm3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.capstone.mapua.studentmonitoringapp",
-            "certificate_hash": "6211f4575edf828b2fcba478afc1e34faa8ccd0d"
-          }
-        },
-        {
-          "client_id": "1021590070325-q25nqldq3n9994e2ofdjpicq6rjmqv93.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBign3V3lFeIANbmPWh_ssOafBxEdJxNYU"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1021590070325-q25nqldq3n9994e2ofdjpicq6rjmqv93.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1021590070325:android:b788ca3c88c2e118",
         "android_client_info": {
           "package_name": "com.mapua.aquajmt.customerapp"
@@ -145,8 +101,59 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021590070325:android:659cbb6904e9d551",
+        "android_client_info": {
+          "package_name": "com.capstone.mapua.studentmonitoringapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021590070325-gu7itpoq2o6m5i9esckorvujqlcnpb4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.mapua.studentmonitoringapp",
+            "certificate_hash": "e1582d9b798e6d8cd5558626d80d3780012c158a"
+          }
+        },
+        {
+          "client_id": "1021590070325-mefbelu0ae83j9o9q23onj6hu15ervm3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.mapua.studentmonitoringapp",
+            "certificate_hash": "6211f4575edf828b2fcba478afc1e34faa8ccd0d"
+          }
+        },
+        {
+          "client_id": "1021590070325-q25nqldq3n9994e2ofdjpicq6rjmqv93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBign3V3lFeIANbmPWh_ssOafBxEdJxNYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021590070325-q25nqldq3n9994e2ofdjpicq6rjmqv93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
-
   ],
   "configuration_version": "1"
 }

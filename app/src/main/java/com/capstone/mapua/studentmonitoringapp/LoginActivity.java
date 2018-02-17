@@ -112,13 +112,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     @Override
     public void onSuccessGetParentDetails(ParentDetails body) {
         SharedPref.parentData = body.getParent();
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_ID,body.getParent().getId(),context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, body.getParent().getId(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, body.getParent().getParentOf(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, body.getParent().getParentLName(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, body.getParent().getParentFName(), context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_CONTACT,body.getParent().getContactNo(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_OCUPATION,body.getParent().getOccupation(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.PARENT_RELATIONSHIP,body.getParent().getRelationship(),context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, body.getParent().getContactNo(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, body.getParent().getOccupation(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, body.getParent().getRelationship(), context);
 
         Log.e("getParentOf", body.getParent().getParentOf());
         if (NetworkTest.isOnline(context)) {
@@ -142,15 +142,15 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.studentData = body.getStudent();
         loader.checkLoad();
 
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_id,body.getStudent().getId(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,body.getStudent().getLastName(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_firstName,body.getStudent().getFirstName(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_middleName,body.getStudent().getMiddleName(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_section,body.getStudent().getSection(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_contactNo,body.getStudent().getContactNo(),context);
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.STUDENT_emergencyContact,body.getStudent().getEmergencyContact(),context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_id, body.getStudent().getId(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_lastName, body.getStudent().getLastName(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_firstName, body.getStudent().getFirstName(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_middleName, body.getStudent().getMiddleName(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_section, body.getStudent().getSection(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, body.getStudent().getContactNo(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, body.getStudent().getEmergencyContact(), context);
 
-        SharedPref.setStringValue(SharedPref.USER,SharedPref.SESSION_ON,"isLogged",context);
+        SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
         Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);
         finish();

@@ -22,7 +22,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center">
 
         <ImageButton
@@ -34,49 +33,28 @@
 
 
     <TextView
-        android:id="@+id/tv_refresh"
+        android:id="@+id/tv_announceLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
         android:gravity="center"
         android:text="@string/announcement"
         android:textAlignment="center"
         android:textColor="@color/midnightBlue"
         android:textSize="@dimen/text_normal" />
 
-    <Button
-        android:id="@+id/btn_refresh"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sr_swipe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        android:layout_marginTop="@dimen/margin"
-        android:text="CLICK HERE TO REFRESH"
-        android:visibility="gone" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/tv_display_announcement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/message_announcement"
-            android:textAlignment="center"
-            android:textColor="@color/midnightBlue"
-            android:textSize="@dimen/text_normal" />
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_announcement"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

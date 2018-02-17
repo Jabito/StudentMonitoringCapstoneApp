@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.capstone.mapua.studentmonitoringapp.fragments.AttendanceFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.HomeFragment;
-import com.capstone.mapua.studentmonitoringapp.fragments.MessagesFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.ParentInfoFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.SettingsFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.StudentInfoFragment;
@@ -45,17 +44,15 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.tv_parent_info)
     LinearLayout tv_parent_info;
     @BindView(R.id.nav_home)
-    TextView nav_home;
+    LinearLayout nav_home;
     @BindView(R.id.nav_attendance_logs)
-    TextView nav_attendance_logs;
+    LinearLayout nav_attendance_logs;
     @BindView(R.id.nav_student)
-    TextView nav_student;
-    @BindView(R.id.nav_messages)
-    TextView nav_messages;
+    LinearLayout nav_student;
     @BindView(R.id.nav_settings)
-    TextView nav_settings;
+    LinearLayout nav_settings;
     @BindView(R.id.nav_logout)
-    TextView nav_logout;
+    LinearLayout nav_logout;
 
     @BindView(R.id.tv_name)
     TextView tv_name;
@@ -102,7 +99,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         btn_nav.setOnClickListener(this);
         nav_home.setOnClickListener(this);
         nav_attendance_logs.setOnClickListener(this);
-        nav_messages.setOnClickListener(this);
         nav_settings.setOnClickListener(this);
         nav_logout.setOnClickListener(this);
         nav_student.setOnClickListener(this);
@@ -177,16 +173,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                 closeDrawer();
                 break;
 
-            //not used
-            case R.id.nav_messages:
-                tv_header.setText(context.getString(R.string.message_));
-                fragment = null;
-                fragment = new MessagesFragment();
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container_body, fragment);
-                fragmentTransaction.commit();
-                closeDrawer();
-                break;
             case R.id.nav_settings:
                 tv_header.setText(context.getString(R.string.action_settings));
                 fragment = null;
@@ -203,7 +189,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                SharedPref.setStringValue(SharedPref.USER,SharedPref.SESSION_ON,"",context);
+                                SharedPref.setBooleanValue(SharedPref.USER,SharedPref.SESSION_ON,false,context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, "", context);

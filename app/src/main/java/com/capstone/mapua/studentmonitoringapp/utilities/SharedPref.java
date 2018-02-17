@@ -63,6 +63,17 @@ public class SharedPref {
     //used for checking of session
     public static String SMS_TOGGLE = "SMS_TOGGLE";
 
+
+    //used for taplogadapter
+    public static String LAST_LOG_UPDATE = "LAST_LOG_UPDATE";
+    public static String LOG_TITLE = "LOG_TITLE";
+
+ //used for announcementadapter
+    public static String LAST_ANNOUNCEMENT_UPDATE = "LAST_ANNOUNCEMENT_UPDATE";
+
+
+
+
     public void setBoolValue(String Key, boolean value, Context context) {
 
         SharedPreferences prefs = context.getSharedPreferences(Key, Context.MODE_PRIVATE);

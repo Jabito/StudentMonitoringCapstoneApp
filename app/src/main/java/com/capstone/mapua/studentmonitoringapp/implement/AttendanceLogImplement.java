@@ -30,19 +30,20 @@ public class AttendanceLogImplement {
         this.callback = callback;
     }
 
-    public void getTapLogOfStudent(final ArrayList<TapLog> tapLogs) {
+    public void getTapLogOfStudent(final ArrayList<TapLog> tapLogs, final ArrayList<TapLog> logArrayList) {
         AsyncTask task = new AsyncTask() {
-
-
             @Override
             protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                callback.onSaveComplete(dbHandler.getTapLogList());
+                callback.onSaveComplete(logArrayList);
+
             }
 
             @Override
             protected Object doInBackground(Object[] objects) {
+                dbHandler.deteleLogData();
                 SetReturnDataToLocal.setTapLogToDB(tapLogs, dbHandler);
+                logArrayList.clear();
+                logArrayList.addAll(dbHandler.getTapLogList());
                 return null;
             }
         };

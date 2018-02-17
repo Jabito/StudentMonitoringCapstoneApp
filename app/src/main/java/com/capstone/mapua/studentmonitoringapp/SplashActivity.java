@@ -18,6 +18,7 @@ import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 public class SplashActivity extends Activity {
     ProgressBar mProgress;
     Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +49,18 @@ public class SplashActivity extends Activity {
 
     private void startApp() {
 
-        if (SharedPref.getStringValue(SharedPref.USER, SharedPref.SESSION_ON, context) != "") {
-            Intent intent = new Intent(this, NavigationActivity.class);
-            startActivity(intent);
-        } else {
+        try {
+            if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, context)) {
+                Intent intent = new Intent(this, NavigationActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        } catch (Exception e) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
-
     }
-
 
 }

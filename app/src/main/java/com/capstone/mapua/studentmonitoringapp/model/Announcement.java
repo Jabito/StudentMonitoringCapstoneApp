@@ -6,18 +6,31 @@ package com.capstone.mapua.studentmonitoringapp.model;
 
 public class Announcement {
 
-    private Integer messageTypeId;
+    private String messageTypeId;
     private String message;
     private String postedBy;
     private String datePosted;
     private String messageTarget;
-    private String[] parentIds;
+    private String parentIds;
 
-    public Integer getMessageTypeId() {
+    public Announcement() {
+    }
+
+    public Announcement(String messageTypeId, String message, String postedBy, String datePosted, String messageTarget, String parentIds) {
+
+        this.messageTypeId = messageTypeId;
+        this.message = message;
+        this.postedBy = postedBy;
+        this.datePosted = datePosted;
+        this.messageTarget = messageTarget;
+        this.parentIds = parentIds;
+    }
+
+    public String getMessageTypeId() {
         return messageTypeId;
     }
 
-    public void setMessageTypeId(Integer messageTypeId) {
+    public void setMessageTypeId(String messageTypeId) {
         this.messageTypeId = messageTypeId;
     }
 
@@ -53,11 +66,11 @@ public class Announcement {
         this.messageTarget = messageTarget;
     }
 
-    public String[] getParentIds() {
+    public String announcement() {
         return parentIds;
     }
 
-    public void setParentIds(String[] parentIds) {
+    public void setParentIds(String parentIds) {
         this.parentIds = parentIds;
     }
 }

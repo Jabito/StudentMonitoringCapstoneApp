@@ -21,7 +21,21 @@ public class DateConverter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("Month");
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM");
+        return dt1.format(date);
+    }
+
+    //to format the received date from service
+    public static String setToMonthWithDay(String dateReturn) {
+        String date_s = dateReturn;
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Date date = null;
+        try {
+            date = dt.parse(date_s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM d");
         return dt1.format(date);
     }
 
@@ -34,7 +48,7 @@ public class DateConverter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dt1 = new SimpleDateFormat("MM/dd/yyyy");
         return dt1.format(date);
     }
 

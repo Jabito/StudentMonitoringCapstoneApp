@@ -1,6 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.utilities;
 
 import com.capstone.mapua.studentmonitoringapp.database.DatabaseHandler;
+import com.capstone.mapua.studentmonitoringapp.model.Announcement;
 import com.capstone.mapua.studentmonitoringapp.model.TapLog;
 
 import java.util.ArrayList;
@@ -20,4 +21,15 @@ public class SetReturnDataToLocal {
         }
     }
 
+    public static void setAnnouncementToDB(ArrayList<Announcement> announcements, DatabaseHandler dbHandler) {
+        for (Announcement announcement : announcements) {
+            dbHandler.createAnnouncementList(new Announcement(
+                    announcement.getMessageTypeId(),
+                    announcement.getMessage(),
+                    announcement.getPostedBy(),
+                    announcement.getDatePosted(),
+                    announcement.getMessageTarget(),
+                    announcement.announcement()));
+        }
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.capstone.mapua.studentmonitoringapp.R;
 import com.capstone.mapua.studentmonitoringapp.model.TapLog;
 import com.capstone.mapua.studentmonitoringapp.utilities.DateConverter;
+import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class TapLogAdapter extends RecyclerView.Adapter<TapLogAdapter.Holder> {
     ArrayList<TapLog> arrayList = new ArrayList<>();
     Context context;
 
-    String label = "";
+
     public TapLogAdapter(Context context, ArrayList<TapLog> arrayList ) {
         this.arrayList = arrayList;
         this.context = context;
@@ -43,11 +44,14 @@ public class TapLogAdapter extends RecyclerView.Adapter<TapLogAdapter.Holder> {
     @Override
     public void onBindViewHolder(Holder holder, int position) {
 
-        if(label != DateConverter.setToMonth(arrayList.get(position).getLogDateTime())){
+
+        if (!DateConverter.setToMonth(arrayList.get(position).getLogDateTime()).equals(SharedPref.LOG_TITLE)) {
             holder.tv_label.setVisibility(View.VISIBLE);
-            label = DateConverter.setToMonth(arrayList.get(position).getLogDateTime());
-        }else
+        } else {
             holder.tv_label.setVisibility(View.GONE);
+        }
+        SharedPref.LOG_TITLE = DateConverter.setToMonth(arrayList.get(position).getLogDateTime());
+
 
         holder.tv_label.setText(DateConverter.setToMonth(arrayList.get(position).getLogDateTime()));
 

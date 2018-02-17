@@ -7,12 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 import com.capstone.mapua.studentmonitoringapp.R;
 import com.capstone.mapua.studentmonitoringapp.model.Announcement;
+import com.capstone.mapua.studentmonitoringapp.model.TapLog;
+import com.capstone.mapua.studentmonitoringapp.utilities.DateConverter;
+import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -26,109 +31,75 @@ import butterknife.ButterKnife;
  */
 
 
-
-public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder> {
-    private static final int UNSELECTED = -1;
-
-    private RecyclerView recyclerView;
-    private int selectedItem = UNSELECTED;
+public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.Holder> {
+    ArrayList<Announcement> arrayList = new ArrayList<>();
     Context context;
-    ArrayList<Announcement> announcements;
 
-    public AnnouncementAdapter(RecyclerView recyclerView, Context context, ArrayList<Announcement> announcements) {
-        this.recyclerView = recyclerView;
+
+    public AnnouncementAdapter(Context context, ArrayList<Announcement> announcementArrayList) {
+        this.arrayList = announcementArrayList;
         this.context = context;
-        this.announcements = announcements;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.announcement_layout, parent, false);
-        return new ViewHolder(itemView);
+    public AnnouncementAdapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.announcement_layout, parent, false);
+        return new AnnouncementAdapter.Holder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(position);
+    public void onBindViewHolder(AnnouncementAdapter.Holder holder, int position) {
+        holder.tv_header.setText(arrayList.get(position).getMessage());
+        holder.tv_post.setText(arrayList.get(position).getMessage());
+        holder.tv_datePosted.setText(arrayList.get(position).getMessage());
+        holder.tv_postedBy.setText(arrayList.get(position).getMessage());
+
+        if (position == 0) {
+            holder.tb_details.setChecked(true);
+            holder.ll_showHide.setVisibility(View.VISIBLE);
+        } else {
+            holder.tb_details.setChecked(false);
+            holder.ll_showHide.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return announcements.size();
+        return arrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
-        @BindView(R.id.expandable_layout)
-        ExpandableLayout expandable_layout;
 
-        @BindView(R.id.tv_content)
-        TextView tv_content;
-        @BindView(R.id.ll_header)
-        LinearLayout ll_header;
+    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
 
-        @BindView(R.id.ll_title)
-        LinearLayout ll_title;
-        @BindView(R.id.tv_index)
-        TextView tv_index;
-        @BindView(R.id.tv_index_read)
-        TextView tv_index_read;
+        @BindView(R.id.tv_header)
+        TextView tv_header;
+        @BindView(R.id.tv_datePosted)
+        TextView tv_datePosted;
+        @BindView(R.id.tv_post)
+        TextView tv_post;
+        @BindView(R.id.tv_postedBy)
+        TextView tv_postedBy;
+        @BindView(R.id.tb_details)
+        ToggleButton tb_details;
+        @BindView(R.id.ll_showHide)
+        LinearLayout ll_showHide;
 
-
-        private int position;
-
-        public ViewHolder(View itemView) {
+        public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            expandable_layout.setInterpolator(new OvershootInterpolator());
-            expandable_layout.setOnExpansionUpdateListener(this);
-            ll_title.setOnClickListener(this);
-        }
-
-        public void bind(int position) {
-            this.position = position;
-//            if(position==0)
-//                ll_header.setVisibility(View.GONE);
-            tv_index.setText(getSafeSubstring(announcements.get(position).getMessage(),10) + "...");
-            ll_title.setSelected(false);
-            expandable_layout.collapse(false);
-            tv_content.setText(announcements.get(position).getMessage());
+            tb_details.setOnCheckedChangeListener(this);
         }
 
         @Override
-        public void onClick(View view) {
-            ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedItem);
-            if (holder != null) {
-                holder.ll_title.setSelected(false);
-                holder.tv_index.setText(getSafeSubstring(announcements.get(position).getMessage(),10) + "...");
-                tv_index_read.setText(context.getString(R.string.read_more));
-//                holder.tv_index.setTextColor(context.getColor(R.color.BLACK));
-                holder.expandable_layout.collapse();
-            }
-            if (position == selectedItem) {
-                selectedItem = UNSELECTED;
+        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+            if (isChecked) {
+                ll_showHide.setVisibility(View.VISIBLE);
+
             } else {
-                ll_title.setSelected(true);
-//                tv_index.setTextColor(context.getColor(R.color.white));
-                tv_index.setText((position + 2)+":"+ context.getString(R.string.announcement_));
-                tv_index_read.setText(context.getString(R.string.read_less));
-                expandable_layout.expand();
-                selectedItem = position;
+                ll_showHide.setVisibility(View.GONE);
+
             }
         }
-        @Override
-        public void onExpansionUpdate(float expansionFraction, int state) {
-            recyclerView.smoothScrollToPosition(getAdapterPosition());
-        }
-    }
-
-
-    public String getSafeSubstring(String s, int maxLength){
-        if(!TextUtils.isEmpty(s)){
-            if(s.length() >= maxLength){
-                return s.substring(0, maxLength);
-            }
-        }
-        return s;
     }
 }

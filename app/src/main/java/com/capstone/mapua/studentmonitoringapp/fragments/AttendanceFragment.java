@@ -68,23 +68,30 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         context = getContext();
         callback = this;
         dialog = new CustomDialog();
-        implement = new AttendanceLogImplement(context,dbHandler,callback);
         dbHandler = new DatabaseHandler(context);
-        tapLogAdapter = new TapLogAdapter(context,logArrayList);
-
+        implement = new AttendanceLogImplement(context, dbHandler, callback);
+        tapLogAdapter = new TapLogAdapter(context, logArrayList);
+        rv_logs.setLayoutManager(new LinearLayoutManager(context));
+        rv_logs.setAdapter(tapLogAdapter);
         sr_swipe.setColorSchemeResources(R.color.colorPrimary);
         sr_swipe.setOnRefreshListener(this);
 
-
-        rv_logs.setLayoutManager(new LinearLayoutManager(context));
-        rv_logs.setAdapter(tapLogAdapter);
-
+        getCurrentLog();
         return view;
+    }
+
+    private void getCurrentLog() {
+        SharedPref.LOG_TITLE = "LOG_TITLE";
+        logArrayList.clear();
+        logArrayList.addAll(dbHandler.getTapLogList());
+        tapLogAdapter.notifyDataSetChanged();
+        tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: "
+                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
     }
 
     @Override
     public void onSuccessTapDetails(TapDetails body) {
-        implement.getTapLogOfStudent(body.getTapListDetails());
+        implement.getTapLogOfStudent(body.getTapListDetails(), logArrayList);
 
     }
 
@@ -97,9 +104,13 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
 
     @Override
     public void onSaveComplete(ArrayList<TapLog> logArrayList) {
+        SharedPref.LOG_TITLE = "LOG_TITLE";
         this.logArrayList = logArrayList;
         tapLogAdapter.notifyDataSetChanged();
-        tv_lastUpdate.setText(getText(R.string.pullDown) +"\nUpdated as of: "+ DateConverter.getCurrentDate());
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, DateConverter.getCurrentDate(), context);
+        tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: " + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
+        if (sr_swipe != null)
+            sr_swipe.setRefreshing(false);
     }
 
 
@@ -110,7 +121,7 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
             public void run() {
 
                 if (NetworkTest.isOnline(context)) {
-                    String studentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_id, context);
+                    String studentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, context);
                     APICall.getTapLogOfStudent(studentId, callback);
                     sr_swipe.setRefreshing(true);
                 } else {
