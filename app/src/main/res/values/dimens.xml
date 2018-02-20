@@ -24,4 +24,5 @@
     <dimen name="margin">20dp</dimen>
     <dimen name="sub_margin">10dp</dimen>
     <dimen name="mini_margin">5dp</dimen>
+    <dimen name="toggle_size">30sp</dimen>
 </resources>

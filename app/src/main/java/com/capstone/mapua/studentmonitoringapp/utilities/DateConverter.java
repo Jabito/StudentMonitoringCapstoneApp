@@ -26,7 +26,7 @@ public class DateConverter {
     }
 
     //to format the received date from service
-    public static String setToMonthWithDay(String dateReturn) {
+    public static String setFormatToMonthDayYearAndTime(String dateReturn) {
         String date_s = dateReturn;
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         Date date = null;
@@ -35,7 +35,7 @@ public class DateConverter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM d");
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM d, yyyy HH:mm:ss a ");
         return dt1.format(date);
     }
 

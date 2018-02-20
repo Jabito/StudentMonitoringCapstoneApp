@@ -1,6 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -51,8 +52,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     public void onBindViewHolder(AnnouncementAdapter.Holder holder, int position) {
         holder.tv_header.setText(arrayList.get(position).getMessage());
         holder.tv_post.setText(arrayList.get(position).getMessage());
-        holder.tv_datePosted.setText(arrayList.get(position).getMessage());
-        holder.tv_postedBy.setText(arrayList.get(position).getMessage());
+        holder.tv_datePosted.setText((null != arrayList.get(position).getDatePosted()) ?
+                DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(position).getDatePosted()) : "null");
+        holder.tv_postedBy.setText("posted by " + arrayList.get(position).getPostedBy());
 
         if (position == 0) {
             holder.tb_details.setChecked(true);
@@ -70,7 +72,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     }
 
 
-    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
+    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
         @BindView(R.id.tv_header)
         TextView tv_header;
@@ -84,21 +86,39 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         ToggleButton tb_details;
         @BindView(R.id.ll_showHide)
         LinearLayout ll_showHide;
+        @BindView(R.id.cv_roomDetails)
+        CardView cv_roomDetails;
 
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             tb_details.setOnCheckedChangeListener(this);
+            cv_roomDetails.setOnClickListener(this);
         }
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             if (isChecked) {
                 ll_showHide.setVisibility(View.VISIBLE);
-
+                tv_header.setText((null != arrayList.get(getAdapterPosition()).getDatePosted()) ?
+                        DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
             } else {
                 ll_showHide.setVisibility(View.GONE);
+                tv_header.setText(arrayList.get(getAdapterPosition()).getMessage());
+            }
+        }
 
+        @Override
+        public void onClick(View view) {
+            if (tb_details.isChecked()) {
+                ll_showHide.setVisibility(View.VISIBLE);
+                tv_header.setText((null != arrayList.get(getAdapterPosition()).getDatePosted()) ?
+                        DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
+                tb_details.setChecked(true);
+            } else {
+                ll_showHide.setVisibility(View.GONE);
+                tv_header.setText(arrayList.get(getAdapterPosition()).getMessage());
+                tb_details.setChecked(false);
             }
         }
     }
