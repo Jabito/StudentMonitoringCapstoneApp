@@ -7,7 +7,7 @@ import com.capstone.mapua.studentmonitoringapp.R;
 
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 public class Loader {

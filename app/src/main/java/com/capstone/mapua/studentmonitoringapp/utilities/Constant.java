@@ -1,7 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.utilities;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 public class Constant {

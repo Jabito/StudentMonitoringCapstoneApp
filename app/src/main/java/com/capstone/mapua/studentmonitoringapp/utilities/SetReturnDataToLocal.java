@@ -7,7 +7,7 @@ import com.capstone.mapua.studentmonitoringapp.model.TapLog;
 import java.util.ArrayList;
 
 /**
- * Created by me on 2/16/2018.
+ * Created by jj on 2/16/2018.
  */
 
 public class SetReturnDataToLocal {

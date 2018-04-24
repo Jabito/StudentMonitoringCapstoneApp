@@ -9,6 +9,7 @@ import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.TapDetails;
+import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -16,7 +17,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 public interface AppInterface {
@@ -55,4 +56,8 @@ public interface AppInterface {
     @POST("/app/toggleSMS")
     Call<AnnouncementDetails> setToggleSms(@Query("parentId") String parentId,
                                            @Query("mode") Boolean mode);
+
+    @GET("/app/downloadPicture")
+    Call<UserImageDetails> getUserImage(@Query("userId") String userId);
+
 }

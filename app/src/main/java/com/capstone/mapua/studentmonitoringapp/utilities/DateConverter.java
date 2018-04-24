@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by me on 2/16/2018.
+ * Created by jj on 2/16/2018.
  */
 
 public class DateConverter {

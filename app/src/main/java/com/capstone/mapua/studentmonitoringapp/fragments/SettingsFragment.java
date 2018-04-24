@@ -97,7 +97,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     @Override
     public void onError(String s) {
-        dialog.showMessage(context, dialog.NO_Internet_title, ErrorMessage.setErrorMessage(s), 1);
+        dialog.showMessage(context, dialog.NO_Internet_title, s, 1);
     }
 
     private void setShared(Boolean isChecked, String key) {

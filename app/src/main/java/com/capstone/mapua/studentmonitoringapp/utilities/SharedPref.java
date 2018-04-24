@@ -2,10 +2,14 @@ package com.capstone.mapua.studentmonitoringapp.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
 
 import com.capstone.mapua.studentmonitoringapp.model.Parent;
 import com.capstone.mapua.studentmonitoringapp.model.Student;
 import com.capstone.mapua.studentmonitoringapp.model.User;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 
 /**
@@ -74,22 +78,6 @@ public class SharedPref {
 
 
 
-    public void setBoolValue(String Key, boolean value, Context context) {
-
-        SharedPreferences prefs = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("LOG", value);
-        editor.commit();
-
-
-    }
-
-
-    public static boolean getBoolValue(String Key, Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
-        return preferences.getBoolean("LOG", false);
-    }
-
 
     public static void setStringValue(String Key, String specID, String value, Context context) {
 
@@ -130,6 +118,30 @@ public class SharedPref {
     public static int getIntegerValue(String Key, String specID, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
         return preferences.getInt(specID, 0);
+    }
+
+
+    public static ArrayList<String>  getArrayStringValue(String Key, String specID, Context context) {
+        ArrayList<String> bytes = new ArrayList<>();
+        SharedPreferences prefs = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
+        int size = prefs.getInt(specID+"_size", 0);
+        for(int i=0;i<size;i++)
+        {
+            bytes.add(prefs.getString(specID+"_" + i, null));
+        }
+        return bytes;
+    }
+
+    public static void setArrayStringValue(String Key, String specID, ArrayList<String> bytes, Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(Key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(specID+"_size", bytes.size()); /* byteArr is an array */
+        for(int i=0;i<bytes.size();i++)
+        {
+            editor.remove(specID+"_" + i);
+            editor.putString(specID+"_" + i, bytes.get(i));
+        }
+        editor.commit();
     }
 
 }

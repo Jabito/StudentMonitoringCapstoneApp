@@ -7,7 +7,7 @@ import com.capstone.mapua.studentmonitoringapp.model.TapLog;
 import java.util.ArrayList;
 
 /**
- * Created by IPC on 11/23/2017.
+ * Created by jj on 11/23/2017.
  */
 
 public interface TapCallback {

@@ -26,6 +26,7 @@ import com.capstone.mapua.studentmonitoringapp.fragments.SettingsFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.StudentInfoFragment;
 import com.capstone.mapua.studentmonitoringapp.model.Parent;
 import com.capstone.mapua.studentmonitoringapp.model.User;
+import com.capstone.mapua.studentmonitoringapp.services.AppInterface;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -114,6 +115,8 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         FirebaseMessaging.getInstance().subscribeToTopic("StudentMonitoring");
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e("Refreshed token: " , refreshedToken);
+
+
     }
 
     @Override

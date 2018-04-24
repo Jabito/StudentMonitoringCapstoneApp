@@ -6,12 +6,14 @@ import com.capstone.mapua.studentmonitoringapp.callback.AnnouncementCallback;
 import com.capstone.mapua.studentmonitoringapp.callback.LoginCallback;
 import com.capstone.mapua.studentmonitoringapp.callback.SettingsCallback;
 import com.capstone.mapua.studentmonitoringapp.callback.TapCallback;
+import com.capstone.mapua.studentmonitoringapp.callback.UserImageCallback;
 import com.capstone.mapua.studentmonitoringapp.model.AnnouncementDetails;
 import com.capstone.mapua.studentmonitoringapp.model.EmergencyContactDetails;
 import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.TapDetails;
+import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 import com.capstone.mapua.studentmonitoringapp.services.AppInterface;
 import com.capstone.mapua.studentmonitoringapp.services.AppService;
 import com.capstone.mapua.studentmonitoringapp.utilities.ErrorMessage;
@@ -35,7 +37,7 @@ public class APICall {
                 .enqueue(new Callback<LogInDetails>() {
                     @Override
                     public void onResponse(Call<LogInDetails> call, Response<LogInDetails> response) {
-                        if (response.body() != null) {
+                        if (null != response.body()) {
                             if (response.body().getResponseCode().equalsIgnoreCase("OK")) {
                                 callback.onSuccessSignIn(response.body());
                             } else {
@@ -48,14 +50,12 @@ public class APICall {
                     }
 
                     @Override
-                    public void onFailure(Call<LogInDetails> call, Throwable e) {
-                        try {
-                            callback.onErrorSignIn(e.getMessage());
-                            Log.e("error2", ErrorMessage.setErrorMessage(e.getMessage()));
-                        } catch (Exception error) {
-                            callback.onErrorSignIn("");
-                            Log.e("error3", "error3");
-                        }
+                    public void onFailure(Call<LogInDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onErrorSignIn(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onErrorSignIn("no response to server");
+
 
                     }
                 });
@@ -69,7 +69,7 @@ public class APICall {
                 .enqueue(new Callback<ParentDetails>() {
                     @Override
                     public void onResponse(Call<ParentDetails> call, Response<ParentDetails> response) {
-                        if (response.body() != null) {
+                        if (null != response.body()) {
                             if (response.body().getResponseCode().equalsIgnoreCase("NOT_FOUND")) {
                                 callback.onErrorGetParentDetails("USER NOT FOUND");
                             } else if (response.body().getResponseCode().equalsIgnoreCase("OK")) {
@@ -78,19 +78,16 @@ public class APICall {
                                 callback.onErrorGetParentDetails("UNAUTHORIZED USER");
                             }
                         } else {
-                            callback.onErrorGetParentDetails("no response to server");
+                            callback.onErrorGetParentDetails(ErrorMessage.setErrorMessage("no response to server"));
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ParentDetails> call, Throwable e) {
-                        try {
-                            callback.onErrorGetParentDetails(ErrorMessage.setErrorMessage(e.getMessage()));
-                            Log.e("error2getParent", e.getMessage());
-                        } catch (Exception error) {
-                            callback.onErrorGetParentDetails("");
-                            Log.e("error3getParent", "error3");
-                        }
+                    public void onFailure(Call<ParentDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onErrorGetParentDetails(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onErrorGetParentDetails("no response to server");
 
                     }
                 });
@@ -104,25 +101,21 @@ public class APICall {
                 .enqueue(new Callback<StudentDetails>() {
                     @Override
                     public void onResponse(Call<StudentDetails> call, Response<StudentDetails> response) {
-                        if (response.body() != null) {
+                        if (null != response.body()) {
                             callback.onSuccessGetStudentDetails(response.body());
                             Log.e("success", "success");
                         } else {
-                            callback.onErrorGetStudentDetails("no response to server");
+                            callback.onErrorGetStudentDetails(ErrorMessage.setErrorMessage("no response to server"));
                             Log.e("error1", "error1");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<StudentDetails> call, Throwable e) {
-                        try {
-                            callback.onErrorGetStudentDetails(e.getMessage());
-                            Log.e("error2", e.getMessage());
-                        } catch (Exception error) {
-                            callback.onErrorGetStudentDetails("");
-                            Log.e("error3", "error3");
-                        }
-
+                    public void onFailure(Call<StudentDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onErrorGetStudentDetails(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onErrorGetStudentDetails("no response to server");
                     }
                 });
 
@@ -136,25 +129,21 @@ public class APICall {
                 .enqueue(new Callback<EmergencyContactDetails>() {
                     @Override
                     public void onResponse(Call<EmergencyContactDetails> call, Response<EmergencyContactDetails> response) {
-                        if (response.body() != null) {
+                        if (null != response.body()) {
                             callback.onSuccessGetEmergencyContactDetails(response.body());
                             Log.e("success", "success");
                         } else {
-                            callback.onErrorGetEmergencyContactDetails("no response to server");
+                            callback.onErrorGetEmergencyContactDetails(ErrorMessage.setErrorMessage("no response to server"));
                             Log.e("error1", "error1");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<EmergencyContactDetails> call, Throwable e) {
-                        try {
-                            callback.onErrorGetEmergencyContactDetails(e.getMessage());
-                            Log.e("error2", e.getMessage());
-                        } catch (Exception error) {
-                            callback.onErrorGetEmergencyContactDetails("");
-                            Log.e("error3", "error3");
-                        }
-
+                    public void onFailure(Call<EmergencyContactDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onErrorGetEmergencyContactDetails(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onErrorGetEmergencyContactDetails("no response to server");
                     }
                 });
 
@@ -168,24 +157,21 @@ public class APICall {
                 .enqueue(new Callback<TapDetails>() {
                     @Override
                     public void onResponse(Call<TapDetails> call, Response<TapDetails> response) {
-                        if (response.body() != null) {
+                        if (null != response.body()) {
                             callback.onSuccessTapDetails(response.body());
                             Log.e("success getParent", "success");
                         } else {
-                            callback.onErrorTapDetails("no response to server");
+                            callback.onErrorTapDetails(ErrorMessage.setErrorMessage("no response to server"));
                             Log.e("error1 getParent", "error1");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<TapDetails> call, Throwable e) {
-                        try {
-                            callback.onErrorTapDetails(ErrorMessage.setErrorMessage(e.getMessage()));
-                            Log.e("error2getParent", e.getMessage());
-                        } catch (Exception error) {
-                            callback.onErrorTapDetails("");
-                            Log.e("error3getParent", "error3");
-                        }
+                    public void onFailure(Call<TapDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onErrorTapDetails(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onErrorTapDetails("no response to server");
 
                     }
                 });
@@ -200,24 +186,21 @@ public class APICall {
                 .enqueue(new Callback<AnnouncementDetails>() {
                     @Override
                     public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
-                        try {
-                            if (response.body() != null) {
+
+                            if (null != response.body()) {
                                 callback.onSuccess(response.body());
                             } else {
-                                callback.onError("no response to server");
+                                callback.onError(ErrorMessage.setErrorMessage("no response to server"));
                             }
-                        } catch (Exception e) {
-                            callback.onError("");
-                        }
+
                     }
 
                     @Override
                     public void onFailure(Call<AnnouncementDetails> call, Throwable t) {
-                        try {
-                            callback.onError(t.getMessage());
-                        } catch (Exception e) {
-                            callback.onError("");
-                        }
+                        if (null != t.getMessage())
+                            callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onError("no response to server");
                     }
                 });
     }
@@ -229,26 +212,48 @@ public class APICall {
                 .enqueue(new Callback<AnnouncementDetails>() {
                     @Override
                     public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
-                        try {
-                            if (response.body() != null) {
-                                callback.onSuccess(response.body());
-                            } else {
-                                callback.onError("no response to server");
-                            }
-                        } catch (Exception e) {
-                            callback.onError("");
+                        if (null != response.body()) {
+                            callback.onSuccess(response.body());
+                        } else {
+                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<AnnouncementDetails> call, Throwable t) {
-                        try {
-                            callback.onError(t.getMessage());
-                        } catch (Exception e) {
-                            callback.onError("");
-                        }
+                        if (null != t.getMessage())
+                            callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onError("no response to server");
                     }
                 });
     }
+
+    public static void getUserImage(String userId, final UserImageCallback callback) {
+        AppInterface appInterface;
+        appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
+        appInterface.getUserImage(userId)
+                .enqueue(new Callback<UserImageDetails>() {
+                    @Override
+                    public void onResponse(Call<UserImageDetails> call, Response<UserImageDetails> response) {
+                        if (null != response.body()) {
+                            callback.onSuccess(response.body());
+                        } else {
+                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserImageDetails> call, Throwable t) {
+                        if (null != t.getMessage())
+                            callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
+                        else
+                            callback.onError("no response to server");
+
+                    }
+                });
+    }
+
+
 }
 
