@@ -50,11 +50,11 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
     @Override
     public void onBindViewHolder(AnnouncementAdapter.Holder holder, int position) {
-        holder.tv_header.setText(arrayList.get(position).getMessage());
+        holder.tv_header.setText(addEllipsis(arrayList.get(position).getMessage()));
         holder.tv_post.setText(arrayList.get(position).getMessage());
         holder.tv_datePosted.setText((null != arrayList.get(position).getDatePosted()) ?
                 DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(position).getDatePosted()) : "null");
-        holder.tv_postedBy.setText("posted by " + arrayList.get(position).getPostedBy());
+        holder.tv_postedBy.setText("post by " + arrayList.get(position).getPostedBy());
 
         if (position == 0) {
             holder.tb_details.setChecked(true);
@@ -71,8 +71,17 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         return arrayList.size();
     }
 
+    public String addEllipsis(String data) {
+        String userName;
+        if (data.length() >= 26) {
+            userName = data.substring(0, 26) + "...";
+        } else {
+            userName = data;
+        }
+        return userName;
+    }
 
-    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
 
         @BindView(R.id.tv_header)
         TextView tv_header;
@@ -93,7 +102,6 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             tb_details.setOnCheckedChangeListener(this);
-            cv_roomDetails.setOnClickListener(this);
         }
 
         @Override
@@ -104,22 +112,10 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
                         DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
             } else {
                 ll_showHide.setVisibility(View.GONE);
-                tv_header.setText(arrayList.get(getAdapterPosition()).getMessage());
+                tv_header.setText(addEllipsis(arrayList.get(getAdapterPosition()).getMessage()));
             }
         }
 
-        @Override
-        public void onClick(View view) {
-            if (tb_details.isChecked()) {
-                ll_showHide.setVisibility(View.VISIBLE);
-                tv_header.setText((null != arrayList.get(getAdapterPosition()).getDatePosted()) ?
-                        DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
-                tb_details.setChecked(true);
-            } else {
-                ll_showHide.setVisibility(View.GONE);
-                tv_header.setText(arrayList.get(getAdapterPosition()).getMessage());
-                tb_details.setChecked(false);
-            }
-        }
+
     }
 }

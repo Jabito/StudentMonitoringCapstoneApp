@@ -35,7 +35,7 @@ public class DateConverter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM d, yyyy HH:mm:ss a ");
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMMM d, yyyy HH:mm a ");
         return dt1.format(date);
     }
 

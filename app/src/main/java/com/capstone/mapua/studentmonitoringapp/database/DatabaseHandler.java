@@ -151,6 +151,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String sql = "";
         sql += "SELECT * FROM " + announcementTable;
+        sql += " ORDER BY " + datePosted +" DESC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {

@@ -22,7 +22,7 @@
                 android:id="@+id/tv_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight=".2"
                 android:gravity="left|center"
                 android:paddingLeft="@dimen/sub_margin"
                 android:text="sample"
@@ -32,7 +32,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight=".8"
                 android:gravity="right"
                 android:orientation="horizontal">
 

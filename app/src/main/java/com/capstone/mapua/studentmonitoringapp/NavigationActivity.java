@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -26,6 +27,8 @@ import com.capstone.mapua.studentmonitoringapp.fragments.StudentInfoFragment;
 import com.capstone.mapua.studentmonitoringapp.model.Parent;
 import com.capstone.mapua.studentmonitoringapp.model.User;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,10 +40,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     DrawerLayout drawer_layout;
     @BindView(R.id.btn_nav)
     ImageButton btn_nav;
-
-
-
-
     @BindView(R.id.tv_parent_info)
     LinearLayout tv_parent_info;
     @BindView(R.id.nav_home)
@@ -109,6 +108,12 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment);
         fragmentTransaction.commit();
+
+
+        //to subscribe to a topic
+        FirebaseMessaging.getInstance().subscribeToTopic("StudentMonitoring");
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Refreshed token: " , refreshedToken);
     }
 
     @Override
