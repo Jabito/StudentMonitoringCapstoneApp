@@ -26,6 +26,7 @@ public class CustomDialog {
 
     public String NO_Internet = "Please check your internet connection.";
     public String NO_Internet_title = "Hold On";
+    public String cannot_login = "Cannot Login";
 
 
     TextView tv_message, tv_title;

@@ -94,7 +94,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 //        implement.getParent(body.getUser().getId(),callback);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);
 
-        if (NetworkTest.isOnline(context)) {
+
+        if (null == body.getParent()) {
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.cannot_login, 1);
+        } else if (null != body.getParent().getId() && NetworkTest.isOnline(context)) {
             implement.getParent(body.getParent().getId(), callback);
         } else {
             loader.stopLoad();
@@ -121,16 +125,21 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, body.getParent().getOccupation(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, body.getParent().getRelationship(), context);
 
-        Log.e("getParentOf", body.getParent().getParentOf());
-        if (NetworkTest.isOnline(context)) {
-            implement.getStudent(body.getParent().getParentOf(), callback);
-        } else {
+
+        if (null == body.getParent()) {
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.cannot_login, 1);
+        } else if (null != body.getParent().getParentOf() && NetworkTest.isOnline(context)) {
+             implement.getStudent(body.getParent().getParentOf(), callback);
+         } else {
             loader.stopLoad();
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
         }
 
 
+
     }
+
 
     @Override
     public void onErrorGetParentDetails(String message) {
@@ -151,10 +160,17 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, body.getStudent().getContactNo(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, body.getStudent().getEmergencyContact(), context);
 
-        SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
-        Intent intent = new Intent(this, NavigationActivity.class);
-        startActivity(intent);
-        finish();
+        if (null == body.getStudent()) {
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.cannot_login, 1);
+        } else {
+            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
+            Intent intent = new Intent(this, NavigationActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
         //TODO WILL USE IF EMERGENCY CAN BE RETRIEVE
 //        if (NetworkTest.isOnline(context)) {
 //            implement.getEmergencyContact(body.getParent().getParentOf(), callback);
