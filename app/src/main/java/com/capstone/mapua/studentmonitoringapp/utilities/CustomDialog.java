@@ -23,17 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CustomDialog {
 
     public String HOLD_ON_title = "Hold On";
-
     public String NO_Internet = "Please check your internet connection.";
     public String NO_Internet_title = "Hold On";
     public String cannot_login = "Cannot Login";
-
-
     TextView tv_message, tv_title;
     CircleImageView ci_error_image;
     Button btn_accept;
-
-
 
     public void showMessage(Context context, String title, String message, int errorImage) {
 
@@ -69,39 +64,25 @@ public class CustomDialog {
         dialog.getWindow().setAttributes(lp);
     }
 
-
     private void setDetails(Context context, String message, String title, int errorImage, Button button) {
-
         tv_message.setText(message);
         tv_title.setText(title);
-
-
         switch (errorImage) {
-
             case 1:
-//error
+                //error
                 ci_error_image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.warning));
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.BLACK));
                 break;
-
-
             case 2:
-//congrats
+                //congrats
                 ci_error_image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.success));
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
-
                 break;
-
-
             case 3:
-//Log out
+                //Log out
                 ci_error_image.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.logout));
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.BLACK));
-
                 break;
-
-
         }
     }
-
 }

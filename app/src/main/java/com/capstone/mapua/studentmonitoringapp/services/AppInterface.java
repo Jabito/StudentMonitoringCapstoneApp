@@ -41,10 +41,8 @@ public interface AppInterface {
     @GET("/app/getGuidance")
     Call<GuidanceDetails> getGuidance(@Query("id") String id);
 
-
     @GET("/app/getEmergencyContact")
     Call<EmergencyContactDetails> getEmergencyContact(@Query("id") String id);
-
 
     @GET("/app/getTapLogOfStudent")
     Call<TapDetails> getTapLogOfStudent(@Query("studentId") String studentId);
@@ -52,11 +50,9 @@ public interface AppInterface {
     @GET("/app/getAnnouncements")
     Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
 
-
     @POST("/app/toggleSMS")
     Call<AnnouncementDetails> setToggleSms(@Query("parentId") String parentId,
                                            @Query("mode") Boolean mode);
-
     @GET("/app/downloadPicture")
     Call<UserImageDetails> getUserImage(@Query("userId") String userId);
 

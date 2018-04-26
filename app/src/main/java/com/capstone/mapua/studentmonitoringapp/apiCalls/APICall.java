@@ -13,7 +13,6 @@ import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.TapDetails;
-import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 import com.capstone.mapua.studentmonitoringapp.services.AppInterface;
 import com.capstone.mapua.studentmonitoringapp.services.AppService;
 import com.capstone.mapua.studentmonitoringapp.utilities.ErrorMessage;
