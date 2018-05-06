@@ -14,9 +14,8 @@ import android.widget.Switch;
 import com.capstone.mapua.studentmonitoringapp.R;
 import com.capstone.mapua.studentmonitoringapp.callback.SettingsCallback;
 import com.capstone.mapua.studentmonitoringapp.implement.SettingsImplement;
-import com.capstone.mapua.studentmonitoringapp.model.AnnouncementDetails;
+import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
 import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
-import com.capstone.mapua.studentmonitoringapp.utilities.ErrorMessage;
 import com.capstone.mapua.studentmonitoringapp.utilities.NetworkTest;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 
@@ -29,8 +28,10 @@ import butterknife.ButterKnife;
 
 public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, SettingsCallback {
 
-    @BindView(R.id.switch_toggle)
-    Switch switch_toggle;
+    @BindView(R.id.switch_sms)
+    Switch switch_sms;
+    @BindView(R.id.switch_notif)
+    Switch switch_notif;
 
     SettingsImplement implement;
     Context context;
@@ -54,16 +55,40 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         implement = new SettingsImplement(context);
         parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
 
-        switch_toggle.setOnCheckedChangeListener(this);
+        switch_sms.setOnCheckedChangeListener(this);
+        switch_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    switch_notif.setChecked(false);
+                    setShared(false, SharedPref.NOTIF_TOGGLE);
+                } else {
+                    switch_notif.setChecked(true);
+                    setShared(true, SharedPref.NOTIF_TOGGLE);
+
+                }
+            }
+        });
 
         try {
-            if (SharedPref.getStringValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context).equalsIgnoreCase("true")) {
-                switch_toggle.setChecked(true);
-            } else if (SharedPref.getStringValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context).equalsIgnoreCase("false")) {
-                switch_toggle.setChecked(false);
+            if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context)) {
+                switch_sms.setChecked(true);
+            } else{
+                switch_sms.setChecked(false);
             }
         } catch (Exception e) {
+            setShared(true, SharedPref.SMS_TOGGLE);
+            switch_sms.setChecked(true);
+        }
 
+        try {
+            if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, context)) {
+                switch_notif.setChecked(true);
+            } else {
+                switch_notif.setChecked(false);
+            }
+        } catch (Exception e) {
+            setShared(true, SharedPref.NOTIF_TOGGLE);
+            switch_notif.setChecked(true);
         }
 
         return view;
@@ -73,25 +98,25 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         if (isChecked) {
             if (NetworkTest.isOnline(context)) {
-                implement.setToggleSms(isChecked, parentId, callback);
-                setShared(isChecked, SharedPref.SMS_TOGGLE);
+                implement.setToggleSms(false, parentId, callback);
+                setShared(false, SharedPref.SMS_TOGGLE);
             } else {
-                switch_toggle.setChecked(!isChecked);
+                switch_sms.setChecked(true);
                 dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
             }
         } else {
             if (NetworkTest.isOnline(context)) {
-                implement.setToggleSms(isChecked, parentId, callback);
-                setShared(isChecked, SharedPref.SMS_TOGGLE);
+                implement.setToggleSms(true, parentId, callback);
+                setShared(true, SharedPref.SMS_TOGGLE);
             } else {
-                switch_toggle.setChecked(isChecked);
+                switch_sms.setChecked(false);
                 dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
             }
         }
     }
 
     @Override
-    public void onSuccess(AnnouncementDetails body) {
+    public void onSuccess(ToggleSMSDetails body) {
 
     }
 
@@ -101,12 +126,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     }
 
     private void setShared(Boolean isChecked, String key) {
-        if (isChecked) {
-            SharedPref.setStringValue(SharedPref.USER, key, "true", context);
-        } else {
-            SharedPref.setStringValue(SharedPref.USER, key, "false", context);
-
-        }
-
+            SharedPref.setBooleanValue(SharedPref.USER, key, isChecked, context);
     }
 }

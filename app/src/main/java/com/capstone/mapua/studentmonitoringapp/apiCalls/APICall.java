@@ -13,6 +13,8 @@ import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.TapDetails;
+import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
+import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 import com.capstone.mapua.studentmonitoringapp.services.AppInterface;
 import com.capstone.mapua.studentmonitoringapp.services.AppService;
 import com.capstone.mapua.studentmonitoringapp.utilities.ErrorMessage;
@@ -208,9 +210,9 @@ public class APICall {
         AppInterface appInterface;
         appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
         appInterface.setToggleSms(id, isChecked)
-                .enqueue(new Callback<AnnouncementDetails>() {
+                .enqueue(new Callback<ToggleSMSDetails>() {
                     @Override
-                    public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
+                    public void onResponse(Call<ToggleSMSDetails> call, Response<ToggleSMSDetails> response) {
                         if (null != response.body()) {
                             callback.onSuccess(response.body());
                         } else {
@@ -219,7 +221,7 @@ public class APICall {
                     }
 
                     @Override
-                    public void onFailure(Call<AnnouncementDetails> call, Throwable t) {
+                    public void onFailure(Call<ToggleSMSDetails> call, Throwable t) {
                         if (null != t.getMessage())
                             callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
@@ -247,7 +249,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onError("no response to server");
+                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
 
                     }
                 });

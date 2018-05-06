@@ -34,6 +34,7 @@ public class SharedPref {
     public static String PARENT_FNAME = "PARENT_FNAME";
     public static String PARENT_CONTACT = "PARENT_CONTACT";
     public static String PARENT_OCUPATION = "PARENT_OCUPATION";
+    public static String PARENT_LAST_UPDATE = "PARENT_LAST_UPDATE";
 
 
     //USED UPON RETRIEVAL OF STUDENT`S INFORMATION
@@ -66,6 +67,7 @@ public class SharedPref {
 
     //used for checking of session
     public static String SMS_TOGGLE = "SMS_TOGGLE";
+    public static String NOTIF_TOGGLE = "NOTIF_TOGGLE";
 
 
     //used for taplogadapter

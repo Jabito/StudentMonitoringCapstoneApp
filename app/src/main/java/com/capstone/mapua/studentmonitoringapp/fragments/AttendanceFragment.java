@@ -70,6 +70,7 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         dialog = new CustomDialog();
         dbHandler = new DatabaseHandler(context);
         implement = new AttendanceLogImplement(context, dbHandler, callback);
+        SharedPref.LOG_TITLE = "";
         tapLogAdapter = new TapLogAdapter(context, logArrayList);
         rv_logs.setLayoutManager(new LinearLayoutManager(context));
         rv_logs.setAdapter(tapLogAdapter);

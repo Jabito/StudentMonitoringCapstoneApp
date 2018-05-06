@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 public class ErrorMessage {
 
     @NonNull
-    public static String setErrorMessage(String data) {
+    public static String    setErrorMessage(String data) {
 
         try {
             String message = "";
@@ -20,7 +20,6 @@ public class ErrorMessage {
                 message = "Connection timed out. Please try again.";
             else if (data.contains("Failed to connect to") || data.contains("failed to connect to") || data.contains("no response to server"))
                 message = "Cannot connect to server";
-//                message = "No Internet Connection";
             else if (data.contains("Unable to resolve host"))
                 message = "Cannot connect to server, please check your internet connection";
             else

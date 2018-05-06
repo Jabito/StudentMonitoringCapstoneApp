@@ -1,5 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.callback;
 
+import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
+
 /**
  * Created by IPC on 4/24/2018.
  */

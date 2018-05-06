@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.capstone.mapua.studentmonitoringapp.NavigationActivity;
 import com.capstone.mapua.studentmonitoringapp.R;
+import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -40,11 +41,14 @@ public class MessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification());
+            try{
+                if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, getApplicationContext()))
+                    sendNotification(remoteMessage.getNotification());
+            }catch (Exception e){
+
+            }
+
         }
-
-
-
     }
 
 

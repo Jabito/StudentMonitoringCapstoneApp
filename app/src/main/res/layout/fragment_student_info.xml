@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <LinearLayout
-
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/_grey">
+        android:background="@color/_grey"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/imageCircle_height"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/sub_margin"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_user_pic"
-            android:tint="@color/antiqueWhite"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_userImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/sub_margin"
+                android:src="@drawable/imageplaceholder" />
+
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_userImage"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="@dimen/sub_margin"-->
+                <!--android:src="@drawable/imageplaceholder" />-->
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/margin"
+                android:layout_height="@dimen/margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/tv_name"
@@ -30,28 +51,28 @@
             android:text="@string/sample"
             android:textColor="@color/antiqueWhite"
             android:textSize="@dimen/nav_text_size"
-            android:textStyle="bold"
-            />
+            android:layout_marginBottom="@dimen/sub_margin"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/sub_margin"
             android:gravity="center"
             android:text="@string/sample"
             android:textColor="@color/antiqueWhite"
             android:textSize="@dimen/nav_text_size"
             android:textStyle="bold"
-            android:layout_marginBottom="@dimen/sub_margin"
-            />
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/sub_margin"
         android:orientation="vertical"
-        android:padding="@dimen/sub_margin"
-        android:layout_marginBottom="@dimen/sub_margin">
+        android:padding="@dimen/sub_margin">
 
         <TextView
             android:id="@+id/nav_home"
@@ -81,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".8"
             android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_school_black_24dp"/>
+            app:srcCompat="@drawable/ic_school_black_24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,8 +113,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginBottom="@dimen/sub_margin"
+                android:orientation="vertical"
                 android:visibility="gone">
 
                 <TextView
@@ -101,98 +122,99 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="student id"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Student ID"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/sub_margin">
+                android:layout_marginBottom="@dimen/sub_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_grade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Grade 4"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Grade"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/sub_margin">
+                android:layout_marginBottom="@dimen/sub_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="section"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Section"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/sub_margin">
+                android:layout_marginBottom="@dimen/sub_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="contact number"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Contact Number"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/sub_margin"
                 android:orientation="vertical"
-                android:layout_marginBottom="@dimen/sub_margin">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_emergeny_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="contact number"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Emergency Contact Number"
-                    android:textSize="@dimen/nav_text_size"/>
+                    android:textSize="@dimen/nav_text_size" />
             </LinearLayout>
 
         </LinearLayout>

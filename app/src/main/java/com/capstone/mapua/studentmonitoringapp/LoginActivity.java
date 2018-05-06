@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,6 +19,7 @@ import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
+import com.capstone.mapua.studentmonitoringapp.utilities.DateConverter;
 import com.capstone.mapua.studentmonitoringapp.utilities.Loader;
 import com.capstone.mapua.studentmonitoringapp.utilities.NetworkTest;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
@@ -77,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
                     if (NetworkTest.isOnline(context)) {
                         implement.getSignInData(username, password, callback);
                     } else {
+                        loader.stopLoad();
                         dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
                     }
 
@@ -124,6 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, body.getParent().getContactNo(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, body.getParent().getOccupation(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, body.getParent().getRelationship(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LAST_UPDATE, DateConverter.getCurrentDate(), context);
 
 
         if (null == body.getParent()) {
@@ -159,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_section, body.getStudent().getSection(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, body.getStudent().getContactNo(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, body.getStudent().getEmergencyContact(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_updatedOn, DateConverter.getCurrentDate(), context);
 
         if (null == body.getStudent()) {
             loader.stopLoad();
@@ -202,5 +208,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
 }

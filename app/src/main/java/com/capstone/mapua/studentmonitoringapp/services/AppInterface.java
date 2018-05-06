@@ -9,6 +9,7 @@ import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.TapDetails;
+import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
 import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 
 import retrofit2.Call;
@@ -24,7 +25,9 @@ public interface AppInterface {
 
 
     //    String ENDPOINT = "http://10.10.26.215:8080/";
-    String ENDPOINT = "http://www.aquajmt.com:8080/";
+
+//    String ENDPOINT = "http://www.aquajmt.com:8080/";
+    String ENDPOINT = "http://192.168.1.9:8085/";
 
     @POST("/app/loginUser")
     Call<LogInDetails> getUserLogin(@Query("username") String username,
@@ -51,8 +54,8 @@ public interface AppInterface {
     Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
 
     @POST("/app/toggleSMS")
-    Call<AnnouncementDetails> setToggleSms(@Query("parentId") String parentId,
-                                           @Query("mode") Boolean mode);
+    Call<ToggleSMSDetails> setToggleSms(@Query("parentId") String parentId,
+                                        @Query("mode") Boolean mode);
     @GET("/app/downloadPicture")
     Call<UserImageDetails> getUserImage(@Query("userId") String userId);
 

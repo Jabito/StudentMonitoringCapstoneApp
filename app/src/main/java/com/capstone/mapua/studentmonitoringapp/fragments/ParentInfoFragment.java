@@ -57,10 +57,11 @@ public class ParentInfoFragment extends Fragment {
         String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
         String parentContact = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, context);
         String parentRelationship = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, context);
+        String parentLastUpdate = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LAST_UPDATE, context);
 
 
 
-        tv_last_update.setText("Last Update : 11/23/2017");
+        tv_last_update.setText("Last Update : " + parentLastUpdate);
         tv_name.setText(parentName);
         tv_desc.setText(parentOccupation);
         tv_parent_of.setText(studentName);

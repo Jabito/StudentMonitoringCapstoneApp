@@ -25,7 +25,8 @@
     <string name="read_less">Read less</string>
     <string name="toggleSmsOn">Turn On Sms</string>
     <string name="toggleSmsOff">Turn Off Sms</string>
-    <string name="notification_tag">Sms</string>
+    <string name="notification_tag">Messages</string>
+    <string name="notification_tag2">Notification</string>
 
     <string name="sortBy">Sort By</string>
     <string name="sortByMonth">Month</string>

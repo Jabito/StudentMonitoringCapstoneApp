@@ -50,18 +50,20 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
     @Override
     public void onBindViewHolder(AnnouncementAdapter.Holder holder, int position) {
-        holder.tv_header.setText(addEllipsis(arrayList.get(position).getMessage()));
         holder.tv_post.setText(arrayList.get(position).getMessage());
         holder.tv_datePosted.setText((null != arrayList.get(position).getDatePosted()) ?
                 DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(position).getDatePosted()) : "null");
         holder.tv_postedBy.setText("post by " + arrayList.get(position).getPostedBy());
 
         if (position == 0) {
-            holder.tb_details.setChecked(true);
-            holder.ll_showHide.setVisibility(View.VISIBLE);
-        } else {
             holder.tb_details.setChecked(false);
+            holder.ll_showHide.setVisibility(View.VISIBLE);
+            holder.tv_header.setText((null != arrayList.get(position).getDatePosted()) ?
+                    DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(position).getDatePosted()) : "null");
+        } else {
+            holder.tb_details.setChecked(true);
             holder.ll_showHide.setVisibility(View.GONE);
+            holder.tv_header.setText(addEllipsis(arrayList.get(position).getMessage()));
         }
 
     }
@@ -81,7 +83,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         return userName;
     }
 
-    public class Holder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
+    public class Holder extends RecyclerView.ViewHolder  {
 
         @BindView(R.id.tv_header)
         TextView tv_header;
@@ -101,20 +103,23 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            tb_details.setOnCheckedChangeListener(this);
+            cv_roomDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (tb_details.isChecked()) {
+                        ll_showHide.setVisibility(View.VISIBLE);
+                        tb_details.setChecked(false);
+                        tv_header.setText((null != arrayList.get(getAdapterPosition()).getDatePosted()) ?
+                                DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
+                    } else {
+                        ll_showHide.setVisibility(View.GONE);
+                        tv_header.setText(addEllipsis(arrayList.get(getAdapterPosition()).getMessage()));
+                        tb_details.setChecked(true);
+                    }
+                }
+            });
         }
 
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-            if (isChecked) {
-                ll_showHide.setVisibility(View.VISIBLE);
-                tv_header.setText((null != arrayList.get(getAdapterPosition()).getDatePosted()) ?
-                        DateConverter.setFormatToMonthDayYearAndTime(arrayList.get(getAdapterPosition()).getDatePosted()) : "null");
-            } else {
-                ll_showHide.setVisibility(View.GONE);
-                tv_header.setText(addEllipsis(arrayList.get(getAdapterPosition()).getMessage()));
-            }
-        }
 
 
     }
