@@ -12,8 +12,6 @@ public class UserImageDetails implements Serializable{
     private String responseCode;
     private String imageBase64;
 
-
-
     public String getResponseDesc() {
         return responseDesc;
     }

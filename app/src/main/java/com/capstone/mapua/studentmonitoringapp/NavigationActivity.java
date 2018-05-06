@@ -4,37 +4,48 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.capstone.mapua.studentmonitoringapp.callback.UserImageCallback;
 import com.capstone.mapua.studentmonitoringapp.fragments.AttendanceFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.HomeFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.ParentInfoFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.SettingsFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.StudentInfoFragment;
+import com.capstone.mapua.studentmonitoringapp.implement.StudentInfoImplement;
 import com.capstone.mapua.studentmonitoringapp.model.Parent;
 import com.capstone.mapua.studentmonitoringapp.model.User;
+import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 import com.capstone.mapua.studentmonitoringapp.services.AppInterface;
+import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
+import com.capstone.mapua.studentmonitoringapp.utilities.ImageConvert;
+import com.capstone.mapua.studentmonitoringapp.utilities.NetworkTest;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NavigationActivity extends AppCompatActivity implements View.OnClickListener {
+public class NavigationActivity extends AppCompatActivity implements View.OnClickListener, UserImageCallback {
 
 
     @BindView(R.id.drawer_layout)
@@ -66,6 +77,10 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     Toolbar toolbar;
     @BindView(R.id.container_body)
     FrameLayout container_body;
+    @BindView(R.id.iv_userImage)
+    CircleImageView iv_userImage;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     Fragment fragment;
     FragmentTransaction fragmentTransaction;
@@ -74,6 +89,10 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     User user;
     Parent parent;
 
+    StudentInfoImplement implement;
+    UserImageCallback callback;
+    CustomDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +100,9 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_main);
         context = this;
         ButterKnife.bind(this);
+        implement = new StudentInfoImplement(context);
+        callback = this;
+        dialog = new CustomDialog();
 
         user = SharedPref.userData;
         parent = SharedPref.parentData;
@@ -91,6 +113,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
         String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
         String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
+        String parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
 
         tv_name.setText(parentName);
         tv_desc.setText(parentOccupation);
@@ -114,8 +137,15 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         //to subscribe to a topic
         FirebaseMessaging.getInstance().subscribeToTopic("StudentMonitoring");
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.e("Refreshed token: " , refreshedToken);
+        Log.e("Refreshed token: ", refreshedToken);
 
+        if (NetworkTest.isOnline(context)) {
+            progressBar.setVisibility(View.VISIBLE);
+            implement.getUserImage(parentId, callback);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+        }
 
     }
 
@@ -197,7 +227,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                SharedPref.setBooleanValue(SharedPref.USER,SharedPref.SESSION_ON,false,context);
+                                SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, false, context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, "", context);
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, "", context);
@@ -231,4 +261,18 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             drawer_layout.openDrawer(Gravity.LEFT);
         }
     }
+
+    @Override
+    public void onSuccess(UserImageDetails body) {
+        progressBar.setVisibility(View.GONE);
+        ImageConvert.setBase64ToImageView(body.getImageBase64(),iv_userImage);
+
+    }
+
+    @Override
+    public void onError(String message) {
+        progressBar.setVisibility(View.GONE);
+        dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
+    }
+
 }

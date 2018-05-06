@@ -2,6 +2,7 @@ package com.capstone.mapua.studentmonitoringapp.utilities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,4 +41,13 @@ public class ImageConvert {
     }
 
 
+    public static void setBase64ToImageView(String imageBase64, CircleImageView iv_userImage) {
+        try{
+            byte[] decodedString = Base64.decode(imageBase64.getBytes(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            iv_userImage.setImageBitmap(decodedByte);
+        }catch (Exception e){
+
+        }
+    }
 }

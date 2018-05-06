@@ -29,7 +29,7 @@ public class SetReturnDataToLocal {
                     announcement.getPostedBy(),
                     announcement.getDatePosted(),
                     announcement.getMessageTarget(),
-                    announcement.announcement()));
+                    announcement.getTargetIds()));
         }
     }
 }

@@ -124,7 +124,6 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
 
     @Override
     public void onSaveComplete(ArrayList<Announcement> announcementArrayList) {
-        SharedPref.LAST_ANNOUNCEMENT_UPDATE = "LAST_ANNOUNCEMENT_UPDATE";
         this.announcementArrayList = announcementArrayList;
         adapter.notifyDataSetChanged();
         SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, DateConverter.getCurrentDate(), context);
@@ -141,8 +140,8 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
             public void run() {
 
                 if (NetworkTest.isOnline(context)) {
-                    String parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
-                    APICall.getAnnouncements(parentId, callback);
+                    String userId = SharedPref.getStringValue(SharedPref.USER, SharedPref.USER_ID, context);
+                    APICall.getAnnouncements(userId, callback);
                     sr_swipe.setRefreshing(true);
                 } else {
                     dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);

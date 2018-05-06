@@ -24,16 +24,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/_grey"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/imageCircle_height"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/sub_margin"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_user_pic"
-                    android:tint="@color/antiqueWhite" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_userImage"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/sub_margin"
+                        android:src="@drawable/imageplaceholder" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="@dimen/margin"
+                        android:layout_height="@dimen/margin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tv_name"

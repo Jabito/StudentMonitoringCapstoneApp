@@ -28,9 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/margin"
-            android:paddingRight="@dimen/margin"
-            android:paddingTop="@dimen/margin"
+            android:padding="@dimen/margin"
             android:text="@string/notification_tag"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/nav_text_size"
@@ -38,18 +36,17 @@
             android:theme="@style/SwitchTheme" />
 
         <Switch
-            android:id="@+id/switch_notif"
+            android:id="@+id/sw_notif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/margin"
-            android:paddingRight="@dimen/margin"
-            android:paddingTop="@dimen/margin"
+            android:padding="@dimen/margin"
             android:text="@string/notification_tag2"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/nav_text_size"
             android:textStyle="bold"
             android:theme="@style/SwitchTheme" />
+
     </LinearLayout>
 
 

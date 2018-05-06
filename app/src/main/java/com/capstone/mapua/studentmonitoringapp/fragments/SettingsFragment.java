@@ -30,8 +30,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     @BindView(R.id.switch_sms)
     Switch switch_sms;
-    @BindView(R.id.switch_notif)
-    Switch switch_notif;
+    @BindView(R.id.sw_notif)
+    Switch sw_notif;
 
     SettingsImplement implement;
     Context context;
@@ -56,63 +56,65 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
 
         switch_sms.setOnCheckedChangeListener(this);
-        switch_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sw_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    switch_notif.setChecked(false);
-                    setShared(false, SharedPref.NOTIF_TOGGLE);
-                } else {
-                    switch_notif.setChecked(true);
+                if (sw_notif.isChecked()) {
+                    sw_notif.setChecked(true);
                     setShared(true, SharedPref.NOTIF_TOGGLE);
-
+                } else {
+                    sw_notif.setChecked(false);
+                    setShared(false, SharedPref.NOTIF_TOGGLE);
                 }
             }
         });
 
+
         try {
             if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context)) {
                 switch_sms.setChecked(true);
-            } else{
+            } else {
                 switch_sms.setChecked(false);
             }
         } catch (Exception e) {
             setShared(true, SharedPref.SMS_TOGGLE);
             switch_sms.setChecked(true);
+            e.printStackTrace();
         }
 
         try {
             if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, context)) {
-                switch_notif.setChecked(true);
+                sw_notif.setChecked(true);
             } else {
-                switch_notif.setChecked(false);
+                sw_notif.setChecked(false);
             }
         } catch (Exception e) {
             setShared(true, SharedPref.NOTIF_TOGGLE);
-            switch_notif.setChecked(true);
+            sw_notif.setChecked(true);
+            e.printStackTrace();
         }
+
 
         return view;
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-        if (isChecked) {
-            if (NetworkTest.isOnline(context)) {
-                implement.setToggleSms(false, parentId, callback);
-                setShared(false, SharedPref.SMS_TOGGLE);
+
+        if (NetworkTest.isOnline(context)) {
+            if (switch_sms.isChecked()) {
+                implement.setToggleSms(true, parentId, callback);
+                setShared(true,SharedPref.SMS_TOGGLE);
             } else {
-                switch_sms.setChecked(true);
-                dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+                implement.setToggleSms(false, parentId, callback);
+                setShared(false,SharedPref.SMS_TOGGLE);
             }
         } else {
-            if (NetworkTest.isOnline(context)) {
-                implement.setToggleSms(true, parentId, callback);
-                setShared(true, SharedPref.SMS_TOGGLE);
-            } else {
-                switch_sms.setChecked(false);
-                dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
-            }
+            switch_sms.setChecked(switch_sms.isChecked() ? false : true);
+            setShared(switch_sms.isChecked() ? false : true,SharedPref.SMS_TOGGLE);
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
         }
+
+
     }
 
     @Override
@@ -126,6 +128,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     }
 
     private void setShared(Boolean isChecked, String key) {
-            SharedPref.setBooleanValue(SharedPref.USER, key, isChecked, context);
+        SharedPref.setBooleanValue(SharedPref.USER, key, isChecked, context);
     }
 }

@@ -25,14 +25,6 @@
                 android:layout_margin="@dimen/sub_margin"
                 android:src="@drawable/imageplaceholder" />
 
-            <!--<ImageView-->
-                <!--android:id="@+id/iv_userImage"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="150dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_margin="@dimen/sub_margin"-->
-                <!--android:src="@drawable/imageplaceholder" />-->
-
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="@dimen/margin"

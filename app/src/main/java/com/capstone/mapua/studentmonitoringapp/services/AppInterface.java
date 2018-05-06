@@ -51,7 +51,7 @@ public interface AppInterface {
     Call<TapDetails> getTapLogOfStudent(@Query("studentId") String studentId);
 
     @GET("/app/getAnnouncements")
-    Call<AnnouncementDetails> getAnnouncements(@Query("parentId") String parentId);
+    Call<AnnouncementDetails> getAnnouncements(@Query("userId") String userId);
 
     @POST("/app/toggleSMS")
     Call<ToggleSMSDetails> setToggleSms(@Query("parentId") String parentId,

@@ -20,6 +20,7 @@ import com.capstone.mapua.studentmonitoringapp.implement.StudentInfoImplement;
 import com.capstone.mapua.studentmonitoringapp.model.Student;
 import com.capstone.mapua.studentmonitoringapp.model.UserImageDetails;
 import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
+import com.capstone.mapua.studentmonitoringapp.utilities.ImageConvert;
 import com.capstone.mapua.studentmonitoringapp.utilities.NetworkTest;
 import com.capstone.mapua.studentmonitoringapp.utilities.SharedPref;
 
@@ -113,13 +114,7 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
     public void onSuccess(UserImageDetails body) {
 
         progressBar.setVisibility(View.GONE);
-        try{
-            byte[] decodedString = Base64.decode(body.getImageBase64().getBytes(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            iv_userImage.setImageBitmap(decodedByte);
-        }catch (Exception e){
-
-        }
+        ImageConvert.setBase64ToImageView(body.getImageBase64(),iv_userImage);
 
     }
 

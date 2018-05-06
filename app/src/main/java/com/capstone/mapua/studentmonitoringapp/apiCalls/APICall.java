@@ -55,7 +55,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onErrorSignIn(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onErrorSignIn("no response to server");
+                            callback.onErrorSignIn(ErrorMessage.setErrorMessage("no response to server"));
 
 
                     }
@@ -88,7 +88,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onErrorGetParentDetails(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onErrorGetParentDetails("no response to server");
+                            callback.onErrorGetParentDetails(ErrorMessage.setErrorMessage("no response to server"));
 
                     }
                 });
@@ -116,7 +116,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onErrorGetStudentDetails(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onErrorGetStudentDetails("no response to server");
+                            callback.onErrorGetStudentDetails(ErrorMessage.setErrorMessage("no response to server"));
                     }
                 });
 
@@ -144,7 +144,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onErrorGetEmergencyContactDetails(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onErrorGetEmergencyContactDetails("no response to server");
+                            callback.onErrorGetEmergencyContactDetails(ErrorMessage.setErrorMessage("no response to server"));
                     }
                 });
 
@@ -172,7 +172,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onErrorTapDetails(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onErrorTapDetails("no response to server");
+                            callback.onErrorTapDetails(ErrorMessage.setErrorMessage("no response to server"));
 
                     }
                 });
@@ -180,14 +180,13 @@ public class APICall {
     }
 
 
-    public static void getAnnouncements(String parentId, final AnnouncementCallback callback) {
+    public static void getAnnouncements(String userId, final AnnouncementCallback callback) {
         AppInterface appInterface;
         appInterface = AppService.createApiService(AppInterface.class, AppInterface.ENDPOINT);
-        appInterface.getAnnouncements(parentId)
+        appInterface.getAnnouncements(userId)
                 .enqueue(new Callback<AnnouncementDetails>() {
                     @Override
                     public void onResponse(Call<AnnouncementDetails> call, Response<AnnouncementDetails> response) {
-
                             if (null != response.body()) {
                                 callback.onSuccess(response.body());
                             } else {
@@ -201,7 +200,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onError("no response to server");
+                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
                     }
                 });
     }
@@ -225,7 +224,7 @@ public class APICall {
                         if (null != t.getMessage())
                             callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onError("no response to server");
+                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
                     }
                 });
     }
@@ -254,7 +253,5 @@ public class APICall {
                     }
                 });
     }
-
-
 }
 

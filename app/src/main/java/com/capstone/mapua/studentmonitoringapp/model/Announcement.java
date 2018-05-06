@@ -11,7 +11,7 @@ public class Announcement {
     private String postedBy;
     private String datePosted;
     private String messageTarget;
-    private String parentIds;
+    private String targetIds;
 
     public Announcement() {
     }
@@ -23,7 +23,7 @@ public class Announcement {
         this.postedBy = postedBy;
         this.datePosted = datePosted;
         this.messageTarget = messageTarget;
-        this.parentIds = parentIds;
+        this.targetIds = parentIds;
     }
 
     public String getMessageTypeId() {
@@ -66,11 +66,11 @@ public class Announcement {
         this.messageTarget = messageTarget;
     }
 
-    public String announcement() {
-        return parentIds;
+    public String getTargetIds() {
+        return targetIds;
     }
 
-    public void setParentIds(String parentIds) {
-        this.parentIds = parentIds;
+    public void setTargetIds(String targetIds) {
+        this.targetIds = targetIds;
     }
 }
