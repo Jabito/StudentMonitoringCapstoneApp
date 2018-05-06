@@ -76,8 +76,8 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
         context = getContext();
         callback = this;
         databaseHandler = new DatabaseHandler(context);
-        implement = new AnnouncementImplement(context,databaseHandler,callback);
-        adapter = new AnnouncementAdapter(context,announcementArrayList);
+        implement = new AnnouncementImplement(context, databaseHandler, callback);
+        adapter = new AnnouncementAdapter(context, announcementArrayList);
         rv_announcement.setLayoutManager(new LinearLayoutManager(context));
         rv_announcement.setAdapter(adapter);
         dialog = new CustomDialog();
@@ -95,13 +95,24 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
         announcementArrayList.clear();
         announcementArrayList.addAll(databaseHandler.getAnnouncementList());
         adapter.notifyDataSetChanged();
-        tv_announceLabel.setText(getText(R.string.announcement_) + "\nUpdated as of: "
-                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context));
+
+        String label = "";
+        if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context))
+            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, "", context);
+        if (SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context).isEmpty())
+            label = getText(R.string.announcement_) + "\n" + getText(R.string.pullDown);
+        else
+            label = getText(R.string.announcement_) + "\n" + getText(R.string.pullDown)
+                    + "\nUpdated as of: "
+                    + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context);
+
+        tv_announceLabel.setText(label);
+
     }
 
     private void setParentName() {
         try {
-            String name = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) +", "
+            String name = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", "
                     + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
             tv_display_user.setText("Welcome " + name);
         } catch (Exception e) {

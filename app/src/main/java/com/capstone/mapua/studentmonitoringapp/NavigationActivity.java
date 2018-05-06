@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 
 import com.capstone.mapua.studentmonitoringapp.callback.UserImageCallback;
+import com.capstone.mapua.studentmonitoringapp.database.DatabaseHandler;
 import com.capstone.mapua.studentmonitoringapp.fragments.AttendanceFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.HomeFragment;
 import com.capstone.mapua.studentmonitoringapp.fragments.ParentInfoFragment;
@@ -92,6 +93,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     StudentInfoImplement implement;
     UserImageCallback callback;
     CustomDialog dialog;
+    DatabaseHandler db;
 
 
     @Override
@@ -103,6 +105,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         implement = new StudentInfoImplement(context);
         callback = this;
         dialog = new CustomDialog();
+        db = new DatabaseHandler(context);
 
         user = SharedPref.userData;
         parent = SharedPref.parentData;
@@ -228,24 +231,18 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, false, context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, "", context);
-                                SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, "", context);
-                                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
-                                finish();
+                                SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, "", context);
+                                SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, "", context);
+                                db.deteleAnnouncementData();
+                                db.deteleLogData();
                             }
 
                         })
                         .setNegativeButton("No", null)
                         .show();
-
+                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
+                finish();
                 closeDrawer();
-
-
                 break;
             case R.id.btn_nav:
                 closeDrawer();
@@ -265,7 +262,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onSuccess(UserImageDetails body) {
         progressBar.setVisibility(View.GONE);
-        ImageConvert.setBase64ToImageView(body.getImageBase64(),iv_userImage);
+        ImageConvert.setBase64ToImageView(body.getImageBase64(), iv_userImage);
 
     }
 

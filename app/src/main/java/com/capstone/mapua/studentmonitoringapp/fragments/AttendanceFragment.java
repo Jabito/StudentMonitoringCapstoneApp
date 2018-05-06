@@ -88,6 +88,19 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         tapLogAdapter.notifyDataSetChanged();
         tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: "
                 + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
+
+        String label = "";
+        if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context))
+            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, "", context);
+        if (SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context).isEmpty())
+            label = "" + getText(R.string.pullDown);
+        else
+            label = "" + getText(R.string.pullDown)
+                    + "\nUpdated as of: "
+                    + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context);
+
+        tv_lastUpdate.setText(label);
+
     }
 
     @Override
