@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by me on 2/16/2018.
+ * Created by jj on 2/16/2018.
  */
 
 public class TapLogAdapter extends RecyclerView.Adapter<TapLogAdapter.Holder> {

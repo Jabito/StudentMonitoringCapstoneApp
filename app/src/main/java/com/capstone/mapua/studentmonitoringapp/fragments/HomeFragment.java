@@ -36,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by macbookpro on 9/5/17.
+ * Created by jj on 9/5/17.
  */
 
 public class HomeFragment extends Fragment implements AnnouncementCallback, SwipeRefreshLayout.OnRefreshListener {

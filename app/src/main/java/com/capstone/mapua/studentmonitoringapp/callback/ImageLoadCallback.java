@@ -1,7 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.callback;
 
 /**
- * Created by me on 5/5/2018.
+ * Created by jj on 5/5/2018.
  */
 
 public interface ImageLoadCallback {

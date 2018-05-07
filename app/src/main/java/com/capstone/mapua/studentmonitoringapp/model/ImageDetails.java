@@ -3,7 +3,7 @@ package com.capstone.mapua.studentmonitoringapp.model;
 import java.net.URI;
 
 /**
- * Created by me on 5/5/2018.
+ * Created by jj on 5/5/2018.
  */
 
 public class ImageDetails {

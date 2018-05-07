@@ -3,7 +3,7 @@ package com.capstone.mapua.studentmonitoringapp.utilities;
 import android.support.annotation.NonNull;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 public class ErrorMessage {

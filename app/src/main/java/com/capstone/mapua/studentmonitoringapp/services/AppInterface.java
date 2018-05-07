@@ -1,7 +1,6 @@
 package com.capstone.mapua.studentmonitoringapp.services;
 
 
-
 import com.capstone.mapua.studentmonitoringapp.model.AnnouncementDetails;
 import com.capstone.mapua.studentmonitoringapp.model.EmergencyContactDetails;
 import com.capstone.mapua.studentmonitoringapp.model.GuidanceDetails;
@@ -24,10 +23,9 @@ import retrofit2.http.Query;
 public interface AppInterface {
 
 
-    //    String ENDPOINT = "http://10.10.26.215:8080/";
-
+    String ENDPOINT = "http://10.10.26.215:8085/";
 //    String ENDPOINT = "http://www.aquajmt.com:8080/";
-    String ENDPOINT = "http://192.168.1.9:8085/";
+//    String ENDPOINT = "http://192.168.1.9:8085/";
 
     @POST("/app/loginUser")
     Call<LogInDetails> getUserLogin(@Query("username") String username,
@@ -56,6 +54,7 @@ public interface AppInterface {
     @POST("/app/toggleSMS")
     Call<ToggleSMSDetails> setToggleSms(@Query("parentId") String parentId,
                                         @Query("mode") Boolean mode);
+
     @GET("/app/downloadPicture")
     Call<UserImageDetails> getUserImage(@Query("userId") String userId);
 

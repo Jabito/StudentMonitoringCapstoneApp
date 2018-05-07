@@ -7,7 +7,7 @@ import com.capstone.mapua.studentmonitoringapp.callback.SettingsCallback;
 
 
 /**
- * Created by IPC on 11/26/2017.
+ * Created by jj on 11/26/2017.
  */
 
 public class SettingsImplement {

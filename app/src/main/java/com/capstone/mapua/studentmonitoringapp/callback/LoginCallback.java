@@ -7,7 +7,7 @@ import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 public interface LoginCallback {

@@ -6,7 +6,7 @@ import com.capstone.mapua.studentmonitoringapp.apiCalls.APICall;
 import com.capstone.mapua.studentmonitoringapp.callback.UserImageCallback;
 
 /**
- * Created by me on 5/5/2018.
+ * Created by jj on 5/5/2018.
  */
 
 public class StudentInfoImplement {

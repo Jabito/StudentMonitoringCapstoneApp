@@ -235,13 +235,13 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                                 SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, "", context);
                                 db.deteleAnnouncementData();
                                 db.deteleLogData();
+                                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
+                                finish();
                             }
 
                         })
                         .setNegativeButton("No", null)
                         .show();
-                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
-                finish();
                 closeDrawer();
                 break;
             case R.id.btn_nav:

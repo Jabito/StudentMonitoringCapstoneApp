@@ -16,7 +16,7 @@ import com.capstone.mapua.studentmonitoringapp.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by IPC on 11/22/2017.
+ * Created by jj on 11/22/2017.
  */
 
 

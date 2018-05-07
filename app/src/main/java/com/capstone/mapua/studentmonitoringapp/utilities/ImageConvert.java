@@ -18,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by me on 5/5/2018.
+ * Created by jj on 5/5/2018.
  */
 
 public class ImageConvert {

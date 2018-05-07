@@ -1,7 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.model;
 
 /**
- * Created by IPC on 11/23/2017.
+ * Created by jj on 11/23/2017.
  */
 
 public class GuidanceDetails {

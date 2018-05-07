@@ -3,7 +3,7 @@ package com.capstone.mapua.studentmonitoringapp.model;
 import java.util.Date;
 
 /**
- * Created by IPC on 11/23/2017.
+ * Created by jj on 11/23/2017.
  */
 
 public class EmergencyContact {

@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by IPC on 11/26/2017.
+ * Created by jj on 11/26/2017.
  */
 
 public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, SettingsCallback {

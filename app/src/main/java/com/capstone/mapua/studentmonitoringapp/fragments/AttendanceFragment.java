@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by macbookpro on 9/5/17.
+ * Created by jj on 9/5/17.
  */
 
 public class AttendanceFragment extends Fragment implements TapCallback, SwipeRefreshLayout.OnRefreshListener {
@@ -86,8 +86,7 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         logArrayList.clear();
         logArrayList.addAll(dbHandler.getTapLogList());
         tapLogAdapter.notifyDataSetChanged();
-        tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: "
-                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
+
 
         String label = "";
         if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context))

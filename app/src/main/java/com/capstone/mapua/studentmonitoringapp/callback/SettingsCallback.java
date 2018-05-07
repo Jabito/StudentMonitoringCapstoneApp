@@ -4,7 +4,7 @@ package com.capstone.mapua.studentmonitoringapp.callback;
 import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
 
 /**
- * Created by IPC on 11/26/2017.
+ * Created by jj on 11/26/2017.
  */
 
 public interface SettingsCallback {

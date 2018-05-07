@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by IPC on 11/23/2017.
+ * Created by jj on 11/23/2017.
  */
 
 public class ParentInfoFragment extends Fragment implements UserImageCallback {
