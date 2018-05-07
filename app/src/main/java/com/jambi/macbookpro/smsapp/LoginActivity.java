@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 
     @Override
     public void onSuccessSignIn(LogInDetails body) {
+        Log.d("TOKEN" , "token " + FirebaseInstanceId.getInstance().getToken());
         SharedPref.userData = body.getUser();
 //        implement.getParent(body.getUser().getId(),callback);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);

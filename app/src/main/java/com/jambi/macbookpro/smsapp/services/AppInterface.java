@@ -31,6 +31,8 @@ public interface AppInterface {
     //    String ENDPOINT = "http://10.10.26.215:8080/";
     String ENDPOINT = "http://www.aquajmt.com:8080/";
 
+//    String ENDPOINT = "http://192.168.197.77:8085";
+
     @POST("/app/loginUser")
     Call<LogInDetails> getUserLogin(@Query("username") String username,
                                     @Query("password") String password);
