@@ -69,9 +69,8 @@ public class ParentInfoFragment extends Fragment implements UserImageCallback {
 
 //        tv_last_update.setText(parent.getUpdatedOn());
         String studentName = SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_lastName,context) +", "+SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_firstName,context) + " " + SharedPref.getStringValue(SharedPref.USER,SharedPref.STUDENT_middleName,context);
-        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_NAME, context);
         String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
-        String parentContact = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, context);
         String parentRelationship = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, context);
         String parentLastUpdate = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LAST_UPDATE, context);
         String parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
@@ -82,7 +81,7 @@ public class ParentInfoFragment extends Fragment implements UserImageCallback {
         tv_name.setText(parentName);
         tv_desc.setText(parentOccupation);
         tv_parent_of.setText(studentName);
-        tv_contact.setText(parentContact);
+        tv_contact.setText("");
         tv_relationship.setText(parentRelationship);
 
         if (NetworkTest.isOnline(context)) {

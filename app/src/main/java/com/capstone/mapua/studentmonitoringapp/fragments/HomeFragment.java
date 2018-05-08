@@ -112,8 +112,7 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
 
     private void setParentName() {
         try {
-            String name = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", "
-                    + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+            String name = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_NAME, context);
             tv_display_user.setText("Welcome " + name);
         } catch (Exception e) {
             tv_display_user.setText("Welcome");

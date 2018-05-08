@@ -123,9 +123,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.parentData = body.getParent();
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_ID, body.getParent().getId(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, body.getParent().getParentOf(), context);
-        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, body.getParent().getParentLName(), context);
-        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, body.getParent().getParentFName(), context);
-        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_CONTACT, body.getParent().getContactNo(), context);
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_NAME, body.getParent().getParentName(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, body.getParent().getOccupation(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_RELATIONSHIP, body.getParent().getRelationship(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.PARENT_LAST_UPDATE, DateConverter.getCurrentDate(), context);

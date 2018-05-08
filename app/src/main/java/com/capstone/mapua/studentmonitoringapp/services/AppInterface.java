@@ -23,8 +23,8 @@ import retrofit2.http.Query;
 public interface AppInterface {
 
 
-    String ENDPOINT = "http://10.10.26.215:8085/";
-//    String ENDPOINT = "http://www.aquajmt.com:8080/";
+//    String ENDPOINT = "http://10.10.26.215:8085/";
+    String ENDPOINT = "http://www.aquajmt.com:8080/";
 //    String ENDPOINT = "http://192.168.1.9:8085/";
 
     @POST("/app/loginUser")

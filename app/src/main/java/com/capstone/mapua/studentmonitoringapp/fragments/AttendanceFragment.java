@@ -117,13 +117,19 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
 
     @Override
     public void onSaveComplete(ArrayList<TapLog> logArrayList) {
-        SharedPref.LOG_TITLE = "LOG_TITLE";
-        this.logArrayList = logArrayList;
-        tapLogAdapter.notifyDataSetChanged();
-        SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, DateConverter.getCurrentDate(), context);
-        tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: " + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
-        if (sr_swipe != null)
-            sr_swipe.setRefreshing(false);
+        try{
+            SharedPref.LOG_TITLE = "LOG_TITLE";
+            this.logArrayList = logArrayList;
+            tapLogAdapter.notifyDataSetChanged();
+            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, DateConverter.getCurrentDate(), context);
+            tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: " + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
+            if (sr_swipe != null)
+                sr_swipe.setRefreshing(false);
+        }catch (Exception e){
+            if (sr_swipe != null)
+                sr_swipe.setRefreshing(false);
+        }
+
     }
 
 

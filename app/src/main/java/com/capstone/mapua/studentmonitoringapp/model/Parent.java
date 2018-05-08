@@ -1,5 +1,7 @@
 package com.capstone.mapua.studentmonitoringapp.model;
 
+import java.util.Date;
+
 /**
  * Created by jj on 11/23/2017.
  */
@@ -9,14 +11,48 @@ public class Parent {
     private String id;
     private String parentOf;
     private String relationship;
-    private String parentFName;
-    private String parentLName;
-    private String contactNo;
+    private String parentName;
+    private String officeNo;
     private String occupation;
     private String createdOn;
+    private Boolean smsNotif;
     private String updatedOn;
     private String createdBy;
     private String updatedBy;
+    private String email;
+
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public String getOfficeNo() {
+        return officeNo;
+    }
+
+    public void setOfficeNo(String officeNo) {
+        this.officeNo = officeNo;
+    }
+
+    public Boolean getSmsNotif() {
+        return smsNotif;
+    }
+
+    public void setSmsNotif(Boolean smsNotif) {
+        this.smsNotif = smsNotif;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getId() {
         return id;
@@ -40,30 +76,6 @@ public class Parent {
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
-    }
-
-    public String getParentFName() {
-        return parentFName;
-    }
-
-    public void setParentFName(String parentFName) {
-        this.parentFName = parentFName;
-    }
-
-    public String getParentLName() {
-        return parentLName;
-    }
-
-    public void setParentLName(String parentLName) {
-        this.parentLName = parentLName;
-    }
-
-    public String getContactNo() {
-        return contactNo;
-    }
-
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
     }
 
     public String getOccupation() {

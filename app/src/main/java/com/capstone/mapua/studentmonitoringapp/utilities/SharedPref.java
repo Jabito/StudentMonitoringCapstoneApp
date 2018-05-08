@@ -30,9 +30,7 @@ public class SharedPref {
     public static String PARENT_ID = "PARENT_ID";
     public static String PARENT_PARENT_OF = "PARENT_PARENT_OF";
     public static String PARENT_RELATIONSHIP = "PARENT_RELATIONSHIP";
-    public static String PARENT_LNAME = "PARENT_LNAME";
-    public static String PARENT_FNAME = "PARENT_FNAME";
-    public static String PARENT_CONTACT = "PARENT_CONTACT";
+    public static String PARENT_NAME = "PARENT_NAME";
     public static String PARENT_OCUPATION = "PARENT_OCUPATION";
     public static String PARENT_LAST_UPDATE = "PARENT_LAST_UPDATE";
 

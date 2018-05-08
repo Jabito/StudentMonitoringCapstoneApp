@@ -114,7 +114,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 
-        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_LNAME, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_FNAME, context);
+        String parentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_NAME, context);
         String parentOccupation = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_OCUPATION, context);
         String parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
 
