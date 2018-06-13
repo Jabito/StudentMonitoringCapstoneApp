@@ -99,6 +99,7 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
         String label = "";
         if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context))
             SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, "", context);
+
         if (SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context).isEmpty())
             label = getText(R.string.announcement_) + "\n" + getText(R.string.pullDown);
         else
@@ -137,6 +138,7 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
         this.announcementArrayList = announcementArrayList;
         adapter.notifyDataSetChanged();
         SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, DateConverter.getCurrentDate(), context);
+
         tv_announceLabel.setText(getText(R.string.announcement_) + "\nUpdated as of: "
                 + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context));
         if (sr_swipe != null)
