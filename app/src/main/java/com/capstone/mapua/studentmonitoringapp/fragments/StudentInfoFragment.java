@@ -38,6 +38,8 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
     TextView tv_name;
     @BindView(R.id.tv_desc)
     TextView tv_desc;
+    @BindView(R.id.tv_grade)
+    TextView tv_grade;
     @BindView(R.id.tv_section)
     TextView tv_section;
     @BindView(R.id.tv_contact)
@@ -58,6 +60,7 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
     String studentName = "";
     String studentId = "";
     String studentSection = "";
+    int studentGrade = 0;
     String studentContact = "";
     String studentEmerContact = "";
     String studentLastUpdateOn = "";
@@ -85,6 +88,7 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
         studentName = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_lastName, context) + ", " + SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_firstName, context) + " " + SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_middleName, context);
         studentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_id, context);
         studentSection = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_section, context);
+        studentGrade = SharedPref.getIntegerValue(SharedPref.USER, SharedPref.STUDENT_gradeLvlId, context);
         studentContact = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, context);
         studentEmerContact = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, context);
         studentLastUpdateOn = SharedPref.getStringValue(SharedPref.USER, SharedPref.STUDENT_updatedOn, context);
@@ -93,7 +97,8 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
         tv_last_update.setText("Last Update : " +studentLastUpdateOn);
         tv_name.setText(studentName);
         tv_desc.setText(studentId);
-        tv_section.setText(studentSection);
+        tv_grade.setText("Grade " +Integer.toString(studentGrade));
+        tv_section.setText("Section "+studentSection);
         tv_contact.setText(studentContact);
         tv_emergeny_contact.setText(studentEmerContact);
 

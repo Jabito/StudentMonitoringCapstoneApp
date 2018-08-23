@@ -96,16 +96,15 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
         announcementArrayList.addAll(databaseHandler.getAnnouncementList());
         adapter.notifyDataSetChanged();
 
-        String label = "";
-        if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context))
-            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, "", context);
+        String label;
 
-        if (SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context).isEmpty())
+        if(announcementArrayList.size() == 0){
             label = getText(R.string.announcement_) + "\n" + getText(R.string.pullDown);
-        else
+        }else {
             label = getText(R.string.announcement_) + "\n" + getText(R.string.pullDown)
                     + "\nUpdated as of: "
                     + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context);
+        }
 
         tv_announceLabel.setText(label);
 
@@ -137,10 +136,12 @@ public class HomeFragment extends Fragment implements AnnouncementCallback, Swip
     public void onSaveComplete(ArrayList<Announcement> announcementArrayList) {
         this.announcementArrayList = announcementArrayList;
         adapter.notifyDataSetChanged();
-        SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, DateConverter.getCurrentDate(), context);
+        String currDate = DateConverter.getCurrentDate();
+        SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE,currDate , context);
 
-        tv_announceLabel.setText(getText(R.string.announcement_) + "\nUpdated as of: "
-                + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_ANNOUNCEMENT_UPDATE, context));
+        tv_announceLabel.setText(getText(R.string.announcement_)
+                + "\nUpdated as of: "
+                + currDate);
         if (sr_swipe != null)
             sr_swipe.setRefreshing(false);
     }

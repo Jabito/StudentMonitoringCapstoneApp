@@ -101,16 +101,11 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
         if (NetworkTest.isOnline(context)) {
-            if (switch_sms.isChecked()) {
-                implement.setToggleSms(true, parentId, callback);
-                setShared(true,SharedPref.SMS_TOGGLE);
-            } else {
-                implement.setToggleSms(false, parentId, callback);
-                setShared(false,SharedPref.SMS_TOGGLE);
-            }
+            implement.setToggleSms(isChecked, parentId, callback);
+            setShared(switch_sms.isChecked(),SharedPref.SMS_TOGGLE);
         } else {
-            switch_sms.setChecked(switch_sms.isChecked() ? false : true);
-            setShared(switch_sms.isChecked() ? false : true,SharedPref.SMS_TOGGLE);
+            switch_sms.setChecked(!isChecked);
+            setShared(!isChecked,SharedPref.SMS_TOGGLE);
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
         }
 
