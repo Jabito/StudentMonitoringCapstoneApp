@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.capstone.mapua.studentmonitoringapp.apiCalls.APICall;
 import com.capstone.mapua.studentmonitoringapp.callback.LoginCallback;
+import com.capstone.mapua.studentmonitoringapp.callback.SettingsCallback;
 
 
 /**
@@ -33,6 +34,5 @@ public class LoginImplement {
     public void getEmergencyContact(String id, LoginCallback callback) {
         APICall.getEmergencyContact(id, callback);
     }
-
 
 }

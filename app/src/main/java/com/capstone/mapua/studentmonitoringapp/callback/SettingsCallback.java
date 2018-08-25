@@ -9,7 +9,7 @@ import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
 
 public interface SettingsCallback {
 
-    void onSuccess(ToggleSMSDetails body);
+    void onToggleSmsSuccess(ToggleSMSDetails body);
 
-    void onError(String s);
+    void onToggleSmsError(String s);
 }

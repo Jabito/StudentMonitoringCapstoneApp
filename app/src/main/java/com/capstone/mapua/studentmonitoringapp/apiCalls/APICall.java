@@ -213,18 +213,18 @@ public class APICall {
                     @Override
                     public void onResponse(Call<ToggleSMSDetails> call, Response<ToggleSMSDetails> response) {
                         if (null != response.body()) {
-                            callback.onSuccess(response.body());
+                            callback.onToggleSmsSuccess(response.body());
                         } else {
-                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
+                            callback.onToggleSmsError(ErrorMessage.setErrorMessage("no response to server"));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ToggleSMSDetails> call, Throwable t) {
                         if (null != t.getMessage())
-                            callback.onError(ErrorMessage.setErrorMessage(t.getMessage()));
+                            callback.onToggleSmsError(ErrorMessage.setErrorMessage(t.getMessage()));
                         else
-                            callback.onError(ErrorMessage.setErrorMessage("no response to server"));
+                            callback.onToggleSmsError(ErrorMessage.setErrorMessage("no response to server"));
                     }
                 });
     }

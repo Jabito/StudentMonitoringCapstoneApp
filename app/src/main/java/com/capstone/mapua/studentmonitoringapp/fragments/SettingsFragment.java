@@ -26,10 +26,10 @@ import butterknife.ButterKnife;
  * Created by jj on 11/26/2017.
  */
 
-public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, SettingsCallback {
+public class SettingsFragment extends Fragment implements SettingsCallback {
 
     @BindView(R.id.switch_sms)
-    Switch switch_sms;
+    Switch sw_sms;
     @BindView(R.id.sw_notif)
     Switch sw_notif;
 
@@ -37,7 +37,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     Context context;
     CustomDialog dialog;
     SettingsCallback callback;
+
     String parentId;
+    Boolean smsToggle, notifToggle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,71 +56,51 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         dialog = new CustomDialog();
         implement = new SettingsImplement(context);
         parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
+        smsToggle = SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context);
+        notifToggle = SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, context);
 
-        switch_sms.setOnCheckedChangeListener(this);
+        sw_sms.setChecked(smsToggle);
+        sw_notif.setChecked(notifToggle);
+
+
+        sw_sms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (NetworkTest.isOnline(context)) {
+                    implement.setToggleSms(isChecked, parentId, callback);
+                    setShared(isChecked,SharedPref.SMS_TOGGLE);
+                } else {
+                    sw_sms.setChecked(!isChecked);
+                    setShared(!isChecked,SharedPref.SMS_TOGGLE);
+                    dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
+                }
+
+            }
+        });
+
         sw_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (sw_notif.isChecked()) {
-                    sw_notif.setChecked(true);
-                    setShared(true, SharedPref.NOTIF_TOGGLE);
-                } else {
-                    sw_notif.setChecked(false);
-                    setShared(false, SharedPref.NOTIF_TOGGLE);
-                }
+
+                sw_notif.setChecked(isChecked);
+                setShared(isChecked, SharedPref.NOTIF_TOGGLE);
+
             }
         });
 
 
-        try {
-            if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context)) {
-                switch_sms.setChecked(true);
-            } else {
-                switch_sms.setChecked(false);
-            }
-        } catch (Exception e) {
-            setShared(true, SharedPref.SMS_TOGGLE);
-            switch_sms.setChecked(true);
-            e.printStackTrace();
-        }
 
-        try {
-            if (SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, context)) {
-                sw_notif.setChecked(true);
-            } else {
-                sw_notif.setChecked(false);
-            }
-        } catch (Exception e) {
-            setShared(true, SharedPref.NOTIF_TOGGLE);
-            sw_notif.setChecked(true);
-            e.printStackTrace();
-        }
 
 
         return view;
     }
-
+    
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-
-        if (NetworkTest.isOnline(context)) {
-            implement.setToggleSms(isChecked, parentId, callback);
-            setShared(switch_sms.isChecked(),SharedPref.SMS_TOGGLE);
-        } else {
-            switch_sms.setChecked(!isChecked);
-            setShared(!isChecked,SharedPref.SMS_TOGGLE);
-            dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
-        }
-
+    public void onToggleSmsSuccess(ToggleSMSDetails body) {
 
     }
 
     @Override
-    public void onSuccess(ToggleSMSDetails body) {
-
-    }
-
-    @Override
-    public void onError(String s) {
+    public void onToggleSmsError(String s) {
         dialog.showMessage(context, dialog.NO_Internet_title, s, 1);
     }
 
