@@ -51,4 +51,15 @@ public class LogInDetails {
     public void setParent(Parent parent) {
         Parent = parent;
     }
+
+    @Override
+    public String toString() {
+        return "LogInDetails{" +
+                "responseDesc='" + responseDesc + '\'' +
+                ", responseCode='" + responseCode + '\'' +
+                ", User=" + User +
+                ", Guidance=" + Guidance +
+                ", Parent=" + Parent +
+                '}';
+    }
 }

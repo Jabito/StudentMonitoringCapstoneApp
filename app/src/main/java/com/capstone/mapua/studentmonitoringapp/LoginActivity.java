@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 //        implement.getParent(body.getUser().getId(),callback);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);
 
+        Log.e("LogInDetails body",body.toString());
 
         if (null == body.getParent()) {
             loader.stopLoad();
