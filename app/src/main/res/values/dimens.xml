@@ -13,7 +13,7 @@
     <dimen name="nav_padding">10dp</dimen>
     <dimen name="imageCircle_height">120dp</dimen>
     <dimen name="imageCircle_width">120dp</dimen>
-    <dimen name="text_normal">20sp</dimen>
+    <dimen name="text_normal">15sp</dimen>
     <dimen name="text_small">12sp</dimen>
     <dimen name="alert_circle_width">90dp</dimen>
     <dimen name="alert_circle_height">90dp</dimen>
@@ -24,5 +24,5 @@
     <dimen name="margin">20dp</dimen>
     <dimen name="sub_margin">10dp</dimen>
     <dimen name="mini_margin">5dp</dimen>
-
+    <dimen name="toggle_size">30sp</dimen>
 </resources>
