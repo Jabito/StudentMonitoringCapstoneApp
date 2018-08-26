@@ -53,6 +53,22 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
+        <service
+            android:name=".background.NotificationService"
+            android:enabled="true" >
+        </service>
+
+        <receiver
+            android:name=".background.NotificationRestarterBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+            <intent-filter>
+                <action android:name=".ActivityRecognition.RestartSensor"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

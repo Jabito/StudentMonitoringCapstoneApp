@@ -1,5 +1,6 @@
 package com.capstone.mapua.studentmonitoringapp;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.capstone.mapua.studentmonitoringapp.background.NotificationService;
 import com.capstone.mapua.studentmonitoringapp.callback.UserImageCallback;
 import com.capstone.mapua.studentmonitoringapp.database.DatabaseHandler;
 import com.capstone.mapua.studentmonitoringapp.fragments.AttendanceFragment;
@@ -95,6 +97,8 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     CustomDialog dialog;
     DatabaseHandler db;
 
+    Intent mServiceIntent;
+    private NotificationService mSensorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +154,12 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.NO_Internet, 1);
         }
 
+
+        mSensorService = new NotificationService(context);
+        mServiceIntent = new Intent(context, mSensorService.getClass());
+        if (!isMyServiceRunning(mSensorService.getClass())) {
+            startService(mServiceIntent);
+        }
     }
 
     @Override
@@ -272,4 +282,25 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         dialog.showMessage(context, dialog.NO_Internet_title, message, 1);
     }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("isMyServiceRunning?", true+"");
+                return true;
+            }
+        }
+        Log.i ("isMyServiceRunning?", false+"");
+        return false;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        stopService(mServiceIntent);
+        Log.i("MAINACT", "onDestroy!");
+        super.onDestroy();
+
+    }
 }
+
