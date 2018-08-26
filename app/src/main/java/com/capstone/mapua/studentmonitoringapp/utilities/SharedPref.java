@@ -65,7 +65,6 @@ public class SharedPref {
 
     //used for checking of session
     public static String SMS_TOGGLE = "SMS_TOGGLE";
-    public static String NOTIF_TOGGLE = "NOTIF_TOGGLE";
 
 
     //used for taplogadapter

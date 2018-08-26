@@ -30,8 +30,6 @@ public class SettingsFragment extends Fragment implements SettingsCallback {
 
     @BindView(R.id.switch_sms)
     Switch sw_sms;
-    @BindView(R.id.sw_notif)
-    Switch sw_notif;
 
     SettingsImplement implement;
     Context context;
@@ -57,11 +55,8 @@ public class SettingsFragment extends Fragment implements SettingsCallback {
         implement = new SettingsImplement(context);
         parentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_ID, context);
         smsToggle = SharedPref.getBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, context);
-        notifToggle = SharedPref.getBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, context);
 
         sw_sms.setChecked(smsToggle);
-        sw_notif.setChecked(notifToggle);
-
 
         sw_sms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -77,17 +72,6 @@ public class SettingsFragment extends Fragment implements SettingsCallback {
 
             }
         });
-
-        sw_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                sw_notif.setChecked(isChecked);
-                setShared(isChecked, SharedPref.NOTIF_TOGGLE);
-
-            }
-        });
-
-
 
 
 

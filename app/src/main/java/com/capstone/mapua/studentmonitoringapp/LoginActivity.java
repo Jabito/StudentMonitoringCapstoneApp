@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
 //        implement.getParent(body.getUser().getId(),callback);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.USER_ID, body.getUser().getId(), context);
 
+        Log.e("LogInDetails body",body.toString());
 
         if (null == body.getParent()) {
             loader.stopLoad();
@@ -233,7 +234,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         }else {
             SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
             SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, true, context);
-            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, true, context);
             Intent intent = new Intent(this, NavigationActivity.class);
             startActivity(intent);
             finish();

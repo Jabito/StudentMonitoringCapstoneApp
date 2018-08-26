@@ -114,4 +114,22 @@ public class User {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", locked='" + locked + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userTypeId='" + userTypeId + '\'' +
+                ", email='" + email + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                ", isLocked='" + isLocked + '\'' +
+                ", createdOn='" + createdOn + '\'' +
+                ", updatedOn='" + updatedOn + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                '}';
+    }
 }

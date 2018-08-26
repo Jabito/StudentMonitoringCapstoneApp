@@ -117,4 +117,22 @@ public class Parent {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
+    @Override
+    public String toString() {
+        return "Parent{" +
+                "id='" + id + '\'' +
+                ", parentOf='" + parentOf + '\'' +
+                ", relationship='" + relationship + '\'' +
+                ", parentName='" + parentName + '\'' +
+                ", officeNo='" + officeNo + '\'' +
+                ", occupation='" + occupation + '\'' +
+                ", createdOn='" + createdOn + '\'' +
+                ", smsNotif=" + smsNotif +
+                ", updatedOn='" + updatedOn + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
