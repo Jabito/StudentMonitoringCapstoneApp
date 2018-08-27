@@ -37,7 +37,7 @@ public class SharedPref {
 
     //USED UPON RETRIEVAL OF STUDENT`S INFORMATION
     public static String STUDENT_id = "STUDENT_id";
-    public static String STUDENT_firstName = "STUDENT_lastName";
+    public static String STUDENT_firstName = "STUDENT_firstName";
     public static String STUDENT_lastName = "STUDENT_lastName";
     public static String STUDENT_middleName = "STUDENT_middleName";
     public static String STUDENT_bday = "STUDENT_bday";

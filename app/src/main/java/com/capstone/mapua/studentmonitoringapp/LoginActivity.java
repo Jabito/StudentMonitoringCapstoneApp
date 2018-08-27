@@ -160,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_firstName, body.getStudent().getFirstName(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_middleName, body.getStudent().getMiddleName(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_section, body.getStudent().getSection(), context);
+        SharedPref.setIntegerValue(SharedPref.USER, SharedPref.STUDENT_gradeLvlId, body.getStudent().getGradeLvlId(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, body.getStudent().getContactNo(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, body.getStudent().getEmergencyContact(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_updatedOn, DateConverter.getCurrentDate(), context);
