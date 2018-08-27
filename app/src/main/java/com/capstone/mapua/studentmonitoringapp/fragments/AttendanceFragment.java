@@ -88,16 +88,15 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         tapLogAdapter.notifyDataSetChanged();
 
 
-        String label = "";
-        if (null == SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context))
-            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, "", context);
-        if (SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context).isEmpty())
+        String label;
+
+        if(logArrayList.size() == 0){
             label = "" + getText(R.string.pullDown);
-        else
+        }else {
             label = "" + getText(R.string.pullDown)
                     + "\nUpdated as of: "
                     + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context);
-
+        }
         tv_lastUpdate.setText(label);
 
     }
@@ -121,8 +120,12 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
             SharedPref.LOG_TITLE = "LOG_TITLE";
             this.logArrayList = logArrayList;
             tapLogAdapter.notifyDataSetChanged();
-            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, DateConverter.getCurrentDate(), context);
-            tv_lastUpdate.setText(getText(R.string.pullDown) + "\nUpdated as of: " + SharedPref.getStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, context));
+            String currDate = DateConverter.getCurrentDate();
+
+            SharedPref.setStringValue(SharedPref.USER, SharedPref.LAST_LOG_UPDATE, currDate, context);
+            tv_lastUpdate.setText(getText(R.string.pullDown)
+                    + "\nUpdated as of: "
+                    + currDate);
             if (sr_swipe != null)
                 sr_swipe.setRefreshing(false);
         }catch (Exception e){
@@ -138,7 +141,6 @@ public class AttendanceFragment extends Fragment implements TapCallback, SwipeRe
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 if (NetworkTest.isOnline(context)) {
                     String studentId = SharedPref.getStringValue(SharedPref.USER, SharedPref.PARENT_PARENT_OF, context);
                     APICall.getTapLogOfStudent(studentId, callback);

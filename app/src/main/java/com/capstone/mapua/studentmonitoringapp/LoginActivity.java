@@ -13,11 +13,14 @@ import android.widget.EditText;
 
 
 import com.capstone.mapua.studentmonitoringapp.callback.LoginCallback;
+import com.capstone.mapua.studentmonitoringapp.callback.SettingsCallback;
 import com.capstone.mapua.studentmonitoringapp.implement.LoginImplement;
+import com.capstone.mapua.studentmonitoringapp.implement.SettingsImplement;
 import com.capstone.mapua.studentmonitoringapp.model.EmergencyContactDetails;
 import com.capstone.mapua.studentmonitoringapp.model.LogInDetails;
 import com.capstone.mapua.studentmonitoringapp.model.ParentDetails;
 import com.capstone.mapua.studentmonitoringapp.model.StudentDetails;
+import com.capstone.mapua.studentmonitoringapp.model.ToggleSMSDetails;
 import com.capstone.mapua.studentmonitoringapp.utilities.CustomDialog;
 import com.capstone.mapua.studentmonitoringapp.utilities.DateConverter;
 import com.capstone.mapua.studentmonitoringapp.utilities.Loader;
@@ -29,7 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends AppCompatActivity implements LoginCallback, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements LoginCallback, View.OnClickListener, SettingsCallback {
 
     @BindView(R.id.edit_username)
     EditText edit_username;
@@ -45,6 +48,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
     Loader loader;
     CustomDialog dialog;
 
+    SettingsImplement settingsImplement;
+    SettingsCallback settingsCallback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         dialog = new CustomDialog();
         ButterKnife.bind(this);
         loader.setPropertes();
+
+         settingsImplement = new SettingsImplement(context);
+        settingsCallback = this;
 
 
         button_signin.setOnClickListener(this);
@@ -164,16 +173,16 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_contactNo, body.getStudent().getContactNo(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_emergencyContact, body.getStudent().getEmergencyContact(), context);
         SharedPref.setStringValue(SharedPref.USER, SharedPref.STUDENT_updatedOn, DateConverter.getCurrentDate(), context);
+        SharedPref.setIntegerValue(SharedPref.USER, SharedPref.STUDENT_gradeLvlId, body.getStudent().getGradeLvlId(), context);
 
         if (null == body.getStudent()) {
             loader.stopLoad();
             dialog.showMessage(context, dialog.NO_Internet_title, dialog.cannot_login, 1);
-        } else {
-            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
-            Intent intent = new Intent(this, NavigationActivity.class);
-            startActivity(intent);
-            finish();
+        } else if (null != SharedPref.parentData.getId() ){
+            settingsImplement.setToggleSms(true,SharedPref.parentData.getId(), settingsCallback);
         }
+
+
 
 
         //TODO WILL USE IF EMERGENCY CAN BE RETRIEVE
@@ -216,4 +225,25 @@ public class LoginActivity extends AppCompatActivity implements LoginCallback, V
         return super.dispatchTouchEvent(ev);
     }
 
+    @Override
+    public void onToggleSmsSuccess(ToggleSMSDetails body) {
+
+        if(null == body){
+            loader.stopLoad();
+            dialog.showMessage(context, dialog.NO_Internet_title, dialog.cannot_login, 1);
+        }else {
+            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SESSION_ON, true, context);
+            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.SMS_TOGGLE, true, context);
+            SharedPref.setBooleanValue(SharedPref.USER, SharedPref.NOTIF_TOGGLE, true, context);
+            Intent intent = new Intent(this, NavigationActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onToggleSmsError(String s) {
+        loader.checkLoad();
+        dialog.showMessage(context, dialog.NO_Internet_title, s, 1);
+    }
 }

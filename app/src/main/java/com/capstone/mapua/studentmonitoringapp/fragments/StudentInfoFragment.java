@@ -38,11 +38,13 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
     TextView tv_name;
     @BindView(R.id.tv_desc)
     TextView tv_desc;
+    @BindView(R.id.tv_grade)
+    TextView tv_grade;
     @BindView(R.id.tv_section)
     TextView tv_section;
 
-    @BindView(R.id.tv_grade)
-    TextView tv_grade;
+//    @BindView(R.id.tv_grade)
+//    TextView tv_grade;
     @BindView(R.id.tv_contact)
     TextView tv_contact;
     @BindView(R.id.tv_emergeny_contact)
@@ -68,6 +70,7 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
     String studentGradeText = "";
 
 
+//    int studentGrade = 0;
     String studentContact = "";
     String studentEmerContact = "";
     String studentLastUpdateOn = "";
@@ -234,8 +237,13 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
         tv_last_update.setText("Last Update : " +studentLastUpdateOn);
         tv_name.setText(studentName);
         tv_desc.setText(studentId);
+
         tv_section.setText(studentSectionText);
         tv_grade.setText(studentGradeText);
+
+        tv_grade.setText("Grade " +Integer.toString(studentGrade));
+        tv_section.setText("Section "+studentSection);
+
         tv_contact.setText(studentContact);
         tv_emergeny_contact.setText(studentEmerContact);
 
