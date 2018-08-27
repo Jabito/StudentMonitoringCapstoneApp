@@ -241,8 +241,8 @@ public class StudentInfoFragment extends Fragment implements UserImageCallback {
         tv_section.setText(studentSectionText);
         tv_grade.setText(studentGradeText);
 
-        tv_grade.setText("Grade " +Integer.toString(studentGrade));
-        tv_section.setText("Section "+studentSection);
+//        tv_grade.setText("Grade " +Integer.toString(studentGrade));
+//        tv_section.setText("Section "+studentSection);
 
         tv_contact.setText(studentContact);
         tv_emergeny_contact.setText(studentEmerContact);
